@@ -1,0 +1,34 @@
+PODS:
+  - Flutter (1.0.0)
+  - flutter_webview_plugin (0.0.1):
+    - Flutter
+  - image_picker (0.0.1):
+    - Flutter
+  - shared_preferences (0.0.1):
+    - Flutter
+
+DEPENDENCIES:
+  - Flutter (from `Pods/.symlinks/flutter/ios`)
+  - flutter_webview_plugin (from `Pods/.symlinks/plugins/flutter_webview_plugin-0.1.5/ios`)
+  - image_picker (from `Pods/.symlinks/plugins/image_picker-0.4.1/ios`)
+  - shared_preferences (from `Pods/.symlinks/plugins/shared_preferences-0.4.1/ios`)
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Pods/.symlinks/flutter/ios
+  flutter_webview_plugin:
+    :path: Pods/.symlinks/plugins/flutter_webview_plugin-0.1.5/ios
+  image_picker:
+    :path: Pods/.symlinks/plugins/image_picker-0.4.1/ios
+  shared_preferences:
+    :path: Pods/.symlinks/plugins/shared_preferences-0.4.1/ios
+
+SPEC CHECKSUMS:
+  Flutter: 9d0fac939486c9aba2809b7982dfdbb47a7b0296
+  flutter_webview_plugin: 116575b48572029304775b768e9f15ebfc316274
+  image_picker: ee00aab0487cedc80a304085219503cc6d0f2e22
+  shared_preferences: 5a1d487c427ee18fcd3ea1f2a131569481834b53
+
+PODFILE CHECKSUM: 0420ab312a523ae0eecfb1fc19ea51dd82cc17c7
+
+COCOAPODS: 1.4.0

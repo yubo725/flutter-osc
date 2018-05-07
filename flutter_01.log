@@ -1,0 +1,100 @@
+Flutter crash report; please file at https://github.com/flutter/flutter/issues.
+
+## command
+
+flutter upgrade
+
+## exception
+
+ArgumentError: Invalid argument(s): Cannot find executable for /Users/yubo/flutter/bin/cache/dart-sdk/bin/pub.
+
+```
+#0      _getExecutable (package:process/src/interface/local_process_manager.dart:113)
+#1      LocalProcessManager.start (package:process/src/interface/local_process_manager.dart:41)
+#2      runCommand (package:flutter_tools/src/base/process.dart:115)
+#3      runCommandAndStreamOutput (package:flutter_tools/src/base/process.dart:133)
+<asynchronous suspension>
+#4      pub (package:flutter_tools/src/dart/pub.dart:153)
+<asynchronous suspension>
+#5      pubGet (package:flutter_tools/src/dart/pub.dart:104)
+<asynchronous suspension>
+#6      UpgradeCommand.runCommand (package:flutter_tools/src/commands/upgrade.dart:75)
+<asynchronous suspension>
+#7      FlutterCommand.verifyThenRunCommand (package:flutter_tools/src/runner/flutter_command.dart:290)
+<asynchronous suspension>
+#8      FlutterCommand.run (package:flutter_tools/src/runner/flutter_command.dart:228)
+<asynchronous suspension>
+#9      CommandRunner.runCommand (package:args/command_runner.dart:194)
+<asynchronous suspension>
+#10     FlutterCommandRunner.runCommand (package:flutter_tools/src/runner/flutter_command_runner.dart:286)
+<asynchronous suspension>
+#11     CommandRunner.run.<anonymous closure> (package:args/command_runner.dart:109)
+#12     new Future.sync (dart:async/future.dart:222)
+#13     CommandRunner.run (package:args/command_runner.dart:109)
+#14     FlutterCommandRunner.run (package:flutter_tools/src/runner/flutter_command_runner.dart:166)
+#15     run.<anonymous closure> (package:flutter_tools/runner.dart:90)
+<asynchronous suspension>
+#16     AppContext._run (package:flutter_tools/src/base/context.dart:76)
+<asynchronous suspension>
+#17     AppContext.runInZone.<anonymous closure> (package:flutter_tools/src/base/context.dart:66)
+#18     _rootRun (dart:async/zone.dart:1126)
+#19     _CustomZone.run (dart:async/zone.dart:1023)
+#20     runZoned (dart:async/zone.dart:1501)
+#21     AppContext.runInZone (package:flutter_tools/src/base/context.dart:65)
+#22     run (package:flutter_tools/runner.dart:61)
+<asynchronous suspension>
+#23     main (package:flutter_tools/executable.dart:48)
+<asynchronous suspension>
+#24     main (file:///Users/yubo/flutter/packages/flutter_tools/bin/flutter_tools.dart:16)
+#25     _startIsolate.<anonymous closure> (dart:isolate-patch/dart:isolate/isolate_patch.dart:277)
+#26     _RawReceivePortImpl._handleMessage (dart:isolate-patch/dart:isolate/isolate_patch.dart:165)
+```
+
+## flutter doctor
+
+```
+[✓] Flutter (Channel beta, v0.2.3, on Mac OS X 10.13.4 17E202, locale zh-Hans-CN)
+    • Flutter version 0.2.3 at /Users/yubo/flutter
+    • Framework revision 5a58b36e36 (7 weeks ago), 2018-04-19 23:36:15 -0700
+    • Engine revision 09d05a3891
+    • Dart version 2.0.0-dev.35.flutter-290c576264
+
+[!] Android toolchain - develop for Android devices (Android SDK 27.0.3)
+    • Android SDK at /Users/yubo/Library/Android/sdk
+    • Android NDK location not configured (optional; useful for native profiling support)
+    • Platform android-27, build-tools 27.0.3
+    • ANDROID_HOME = /Users/yubo/Library/Android/sdk
+    • Java binary at: /Applications/Android Studio.app/Contents/jre/jdk/Contents/Home/bin/java
+    • Java version OpenJDK Runtime Environment (build 1.8.0_152-release-915-b08)
+    ✗ Android license status unknown.
+
+[!] iOS toolchain - develop for iOS devices (Xcode 9.3)
+    • Xcode at /Applications/Xcode.app/Contents/Developer
+    • Xcode 9.3, Build version 9E145
+    ✗ libimobiledevice and ideviceinstaller are not installed. To install, run:
+        brew install --HEAD libimobiledevice
+        brew install ideviceinstaller
+    ✗ ios-deploy not installed. To install:
+        brew install ios-deploy
+    • CocoaPods version 1.4.0
+
+[✓] Android Studio (version 3.0)
+    • Android Studio at /Applications/Android Studio.app/Contents
+    • Java version OpenJDK Runtime Environment (build 1.8.0_152-release-915-b08)
+
+[!] IntelliJ IDEA Community Edition (version 2017.3.4)
+    • IntelliJ at /Applications/IntelliJ IDEA CE.app
+    ✗ Flutter plugin not installed; this adds Flutter specific functionality.
+    ✗ Dart plugin not installed; this adds Dart specific functionality.
+    • For information about installing plugins, see
+      https://flutter.io/intellij-setup/#installing-the-plugins
+
+[✓] VS Code (version 1.20.0)
+    • VS Code at /Applications/Visual Studio Code.app/Contents
+    • Dart Code extension version 2.8.2
+
+[✓] Connected devices (1 available)
+    • iPhone X • DB84C665-9CF2-48C1-97EC-BCC3BAB76385 • ios • iOS 11.3 (simulator)
+
+! Doctor found issues in 3 categories.
+```
