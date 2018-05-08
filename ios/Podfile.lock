@@ -13,7 +13,7 @@ PODS:
 
 DEPENDENCIES:
   - barcode_scan (from `Pods/.symlinks/plugins/barcode_scan-0.0.4/ios`)
-  - Flutter (from `Pods/.symlinks/flutter/ios-release`)
+  - Flutter (from `Pods/.symlinks/flutter/ios`)
   - flutter_webview_plugin (from `Pods/.symlinks/plugins/flutter_webview_plugin-0.1.5/ios`)
   - image_picker (from `Pods/.symlinks/plugins/image_picker-0.4.1/ios`)
   - shared_preferences (from `Pods/.symlinks/plugins/shared_preferences-0.4.1/ios`)
@@ -22,7 +22,7 @@ EXTERNAL SOURCES:
   barcode_scan:
     :path: Pods/.symlinks/plugins/barcode_scan-0.0.4/ios
   Flutter:
-    :path: Pods/.symlinks/flutter/ios-release
+    :path: Pods/.symlinks/flutter/ios
   flutter_webview_plugin:
     :path: Pods/.symlinks/plugins/flutter_webview_plugin-0.1.5/ios
   image_picker:

@@ -191,14 +191,15 @@ class MyInfoPageState extends State<MyInfoPage> {
       );
     }
     i = i ~/ 2;
+    String title = titles[i];
     var listItemContent = new Padding(
       padding: const EdgeInsets.fromLTRB(10.0, 15.0, 10.0, 15.0),
       child: new Row(
         children: <Widget>[
           icons[i],
           new Expanded(
-            child: new Text(
-            titles[i],
+              child: new Text(
+            title,
             style: titleTextStyle,
           )),
           rightArrowIcon
@@ -208,10 +209,62 @@ class MyInfoPageState extends State<MyInfoPage> {
     return new InkWell(
       child: listItemContent,
       onTap: () {
-        Navigator
-            .of(context)
-            .push(new MaterialPageRoute(builder: (context) => new CommonWebPage(title: "Test", url: "https://my.oschina.net/u/815261/blog")));
+        _handleListItemClick(title);
+//        Navigator
+//            .of(context)
+//            .push(new MaterialPageRoute(builder: (context) => new CommonWebPage(title: "Test", url: "https://my.oschina.net/u/815261/blog")));
       },
     );
+  }
+
+  _showLoginDialog() {
+    showDialog(
+        context: context,
+        builder: (BuildContext ctx) {
+          return new AlertDialog(
+            title: new Text('提示'),
+            content: new Text('没有登录，现在去登录吗？'),
+            actions: <Widget>[
+              new FlatButton(
+                child: new Text(
+                  '取消',
+                  style: new TextStyle(color: Colors.red),
+                ),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              new FlatButton(
+                child: new Text(
+                  '确定',
+                  style: new TextStyle(color: Colors.blue),
+                ),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  _login();
+                },
+              )
+            ],
+          );
+        });
+  }
+
+  _handleListItemClick(String title) {
+    DataUtils.isLogin().then((isLogin) {
+      if (!isLogin) {
+        // 未登录
+        _showLoginDialog();
+      } else {
+        DataUtils.getUserInfo().then((info) {
+          Navigator.of(context).push(
+            new MaterialPageRoute(
+              builder: (context) => new CommonWebPage(
+                title: "我的博客",
+                url: "https://my.oschina.net/u/${info.id}/blog"
+              )
+            ));
+        });
+      }
+    });
   }
 }
