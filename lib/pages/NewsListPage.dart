@@ -1,9 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import '../util/NetUtils.dart';
 import '../api/Api.dart';
 import 'dart:convert';
 import '../constants/Constants.dart';
-import '../util/DataUtils.dart';
 import '../widgets/SlideView.dart';
 import '../pages/NewsDetailPage.dart';
 import '../widgets/CommonEndLine.dart';
@@ -38,18 +39,30 @@ class NewsListPageState extends State<NewsListPage> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    getNewsList(false);
+  }
+
+  Future<Null> _pullToRefresh() async {
+    curPage = 1;
+    getNewsList(false);
+    return null;
+  }
+
+  @override
   Widget build(BuildContext context) {
     if (listData == null) {
-      getNewsList(false);
       return new Center(
         child: new CircularProgressIndicator(),
       );
     } else {
-      return new ListView.builder(
+      Widget listView = new ListView.builder(
         itemCount: listData.length * 2,
         itemBuilder: (context, i) => renderRow(i),
         controller: _controller,
       );
+      return new RefreshIndicator(child: listView, onRefresh: _pullToRefresh);
     }
   }
 
@@ -77,14 +90,14 @@ class NewsListPageState extends State<NewsListPage> {
                 list1.add(Constants.END_LINE_TAG);
               }
               listData = list1;
-              List list2 = new List();
-              list2.addAll(slideData);
-              list2.addAll(_slideData);
-              slideData = list2;
+
+              slideData = _slideData;
             }
           });
         }
       }
+    }, errorCallback: (e) {
+      print("get news list error: $e");
     });
   }
 

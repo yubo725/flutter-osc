@@ -14,6 +14,7 @@ dependencies:
 #  fluttertoast: "^2.0.3"
   shared_preferences: "^0.4.1"
   event_bus: "^0.4.1"
+  barcode_scan: "^0.0.4"
 
 dev_dependencies:
   flutter_test:

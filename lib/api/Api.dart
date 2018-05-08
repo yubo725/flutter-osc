@@ -36,4 +36,7 @@ class Api {
 
   // 从小黑屋中删除
   static final String DELETE_BLACK = "http://osc.yubo725.top/black/delete";
+
+  // 开源活动
+  static final String EVENT_LIST = "http://osc.yubo725.top/events/";
 }

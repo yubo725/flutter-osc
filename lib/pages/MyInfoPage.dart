@@ -3,6 +3,7 @@ import 'package:flutter_osc/constants/Constants.dart';
 import 'package:flutter_osc/events/LoginEvent.dart';
 import 'package:flutter_osc/events/LogoutEvent.dart';
 import '../pages/TestPage.dart';
+import '../pages/CommonWebPage.dart';
 import '../pages/LoginPage.dart';
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -53,8 +54,12 @@ class MyInfoPageState extends State<MyInfoPage> {
     super.initState();
     _showUserInfo();
     Constants.eventBus.on(LogoutEvent).listen((event) {
-      // 收到退出登录的消息
+      // 收到退出登录的消息，刷新个人信息显示
       _showUserInfo();
+    });
+    Constants.eventBus.on(LoginEvent).listen((event) {
+      // 收到登录的消息，重新获取个人信息
+      getUserInfo();
     });
   }
 
@@ -146,7 +151,7 @@ class MyInfoPageState extends State<MyInfoPage> {
                       height: 60.0,
                       decoration: new BoxDecoration(
                         shape: BoxShape.circle,
-                        color: Colors.blue,
+                        color: Colors.transparent,
                         image: new DecorationImage(
                             image: new NetworkImage(userAvatar),
                             fit: BoxFit.cover),
@@ -192,7 +197,7 @@ class MyInfoPageState extends State<MyInfoPage> {
         children: <Widget>[
           icons[i],
           new Expanded(
-              child: new Text(
+            child: new Text(
             titles[i],
             style: titleTextStyle,
           )),
@@ -205,7 +210,7 @@ class MyInfoPageState extends State<MyInfoPage> {
       onTap: () {
         Navigator
             .of(context)
-            .push(new MaterialPageRoute(builder: (context) => new TestPage()));
+            .push(new MaterialPageRoute(builder: (context) => new CommonWebPage(title: "Test", url: "https://my.oschina.net/u/815261/blog")));
       },
     );
   }

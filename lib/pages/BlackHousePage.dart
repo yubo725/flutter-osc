@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_osc/constants/Constants.dart';
+import 'package:flutter_osc/events/LoginEvent.dart';
+import 'package:flutter_osc/util/BlackListUtils.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../util/NetUtils.dart';
 import '../api/Api.dart';
 import 'dart:convert';
+import '../pages/LoginPage.dart';
 import '../util/DataUtils.dart';
 import '../util/Utf8Utils.dart';
 
@@ -13,6 +18,7 @@ class BlackHousePage extends StatefulWidget {
 }
 
 class BlackHousePageState extends State<BlackHousePage> {
+  bool isLogin = true;
   List blackDataList;
   TextStyle btnStyle = new TextStyle(color: Colors.white, fontSize: 12.0);
 
@@ -37,10 +43,31 @@ class BlackHousePageState extends State<BlackHousePage> {
         }, errorCallback: (e) {
           print("network error: $e");
         });
+      } else {
+        setState(() {
+          isLogin = false;
+        });
       }
     });
   }
 
+  // 获取用户信息
+  getUserInfo() async {
+    SharedPreferences sp = await SharedPreferences.getInstance();
+    String accessToken = sp.get(DataUtils.SP_AC_TOKEN);
+    Map<String, String> params = new Map();
+    params['access_token'] = accessToken;
+    NetUtils.get(Api.USER_INFO, (data) {
+      if (data != null) {
+        var map = json.decode(data);
+        DataUtils.saveUserInfo(map).then((userInfo) {
+          queryBlackList();
+        });
+      }
+    }, params: params);
+  }
+
+  // 从黑名单中删除
   deleteFromBlack(authorId) {
     DataUtils.getUserInfo().then((userInfo) {
       if (userInfo != null) {
@@ -55,6 +82,8 @@ class BlackHousePageState extends State<BlackHousePage> {
             if (data != null) {
               var obj = json.decode(data);
               if (obj['code'] == 0) {
+                // 删除成功
+                BlackListUtils.removeBlackId(authorId);
                 queryBlackList();
               } else {
                 showResultDialog("操作失败：${obj['msg']}");
@@ -118,6 +147,30 @@ class BlackHousePageState extends State<BlackHousePage> {
   }
 
   Widget getBody() {
+    if (!isLogin) {
+      return new Center(
+        child: new InkWell(
+          child: new Container(
+            padding: const EdgeInsets.fromLTRB(15.0, 8.0, 15.0, 8.0),
+            child: new Text("去登录"),
+            decoration: new BoxDecoration(
+                border: new Border.all(color: Colors.black),
+                borderRadius: new BorderRadius.all(new Radius.circular(5.0))
+            ),
+          ),
+          onTap: () async {
+            final result = await Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) {
+              return LoginPage();
+            }));
+            if (result != null && result == "refresh") {
+              // 通知动弹页面刷新
+              Constants.eventBus.fire(new LoginEvent());
+              getUserInfo();
+            }
+          },
+        ),
+      );
+    }
     if (blackDataList == null) {
       return new Center(
         child: new CircularProgressIndicator(),
@@ -148,7 +201,7 @@ class BlackHousePageState extends State<BlackHousePage> {
                 height: 45.0,
                 decoration: new BoxDecoration(
                   shape: BoxShape.circle,
-                  color: Colors.blue,
+                  color: Colors.transparent,
                   image: new DecorationImage(
                       image: new NetworkImage(
                           "${blackDataList[index]['authoravatar']}"),

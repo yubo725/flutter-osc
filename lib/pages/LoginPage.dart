@@ -58,8 +58,8 @@ class LoginPageState extends State<LoginPage> {
             DataUtils.saveLoginInfo(map);
             Navigator.pop(context, "refresh");
           }
-        } catch (exception) {
-          print(exception);
+        } catch (e) {
+          print("parse login result error: $e");
         }
       } else {
         // 没拿到js中的数据，延迟一秒再拿

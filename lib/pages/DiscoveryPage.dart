@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
+import 'OfflineActivityPage.dart';
+import 'CommonWebPage.dart';
+import 'package:barcode_scan/barcode_scan.dart';
 
 class DiscoveryPage extends StatelessWidget {
 
@@ -10,7 +14,7 @@ class DiscoveryPage extends StatelessWidget {
   static const double IMAGE_ICON_WIDTH = 30.0;
   static const double ARROW_ICON_WIDTH = 16.0;
 
-  var imagePaths = [
+  final imagePaths = [
     "images/ic_discover_softwares.png",
     "images/ic_discover_git.png",
     "images/ic_discover_gist.png",
@@ -19,11 +23,11 @@ class DiscoveryPage extends StatelessWidget {
     "images/ic_discover_nearby.png",
     "images/ic_discover_pos.png",
   ];
-  var titles = [
-    "开源软件", "码云推荐", "代码片段", "扫一扫", "摇一摇", "附近的程序员", "线下活动"
+  final titles = [
+    "开源软件", "码云推荐", "代码片段", "扫一扫", "摇一摇", "码云封面人物", "线下活动"
   ];
-  var rightArrowIcon = new Image.asset('images/ic_arrow_right.png', width: ARROW_ICON_WIDTH, height: ARROW_ICON_WIDTH,);
-  var titleTextStyle = new TextStyle(fontSize: 16.0);
+  final rightArrowIcon = new Image.asset('images/ic_arrow_right.png', width: ARROW_ICON_WIDTH, height: ARROW_ICON_WIDTH,);
+  final titleTextStyle = new TextStyle(fontSize: 16.0);
   List listData = [];
 
   DiscoveryPage() {
@@ -69,7 +73,7 @@ class DiscoveryPage extends StatelessWidget {
     );
   }
 
-  renderRow(i) {
+  renderRow(BuildContext ctx, int i) {
     var item = listData[i];
     if (item is String) {
       switch (item) {
@@ -104,13 +108,58 @@ class DiscoveryPage extends StatelessWidget {
           ],
         ),
       );
-      return new GestureDetector(
-        child: new InkWell(
-          onTap: () {},
-          child: listItemContent,
-        ),
-        onTap: () {},
+      return new InkWell(
+        onTap: () {
+          handleListItemClick(ctx, item);
+        },
+        child: listItemContent,
       );
+    }
+  }
+
+  void handleListItemClick(BuildContext ctx, ListItem item) {
+    String title = item.title;
+    if (title == "扫一扫") {
+      scan();
+    } else if (title == "线下活动") {
+      Navigator.of(ctx).push(new MaterialPageRoute(
+        builder: (context) {
+          return new OfflineActivityPage();
+        }
+      ));
+    } else if (title == "码云推荐") {
+      Navigator.of(ctx).push(new MaterialPageRoute(
+          builder: (context) {
+            return new CommonWebPage(title: "码云推荐", url: "https://m.gitee.com/explore");
+          }
+      ));
+    } else if (title == "代码片段") {
+      Navigator.of(ctx).push(new MaterialPageRoute(
+          builder: (context) {
+            return new CommonWebPage(title: "代码片段", url: "https://m.gitee.com/gists");
+          }
+      ));
+    } else if (title == "开源软件") {
+      Navigator.of(ctx).push(new MaterialPageRoute(
+          builder: (context) {
+            return new CommonWebPage(title: "开源软件", url: "https://m.gitee.com/explore");
+          }
+      ));
+    } else if (title == "码云封面人物") {
+      Navigator.of(ctx).push(new MaterialPageRoute(
+          builder: (context) {
+            return new CommonWebPage(title: "码云封面人物", url: "https://m.gitee.com/gitee-stars/");
+          }
+      ));
+    }
+  }
+
+  Future scan() async {
+    try {
+      String barcode = await BarcodeScanner.scan();
+      print(barcode);
+    } on Exception catch (e) {
+      print(e);
     }
   }
 
@@ -120,7 +169,7 @@ class DiscoveryPage extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 0.0),
       child: new ListView.builder(
         itemCount: listData.length,
-        itemBuilder: (context, i) => renderRow(i),
+        itemBuilder: (context, i) => renderRow(context, i),
       ),
     );
   }

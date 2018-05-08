@@ -88,25 +88,22 @@ class TweetsListPageState extends State<TweetsListPage> {
           params['dataType'] = "json";
           NetUtils.get(Api.TWEETS_LIST, (data) {
             Map<String, dynamic> obj = json.decode(data);
-            setState(() {
-              if (!isLoadMore) {
-                // first load
-                if (isHot) {
-                  hotTweetsList = obj['tweetlist'];
-                } else {
-                  normalTweetsList = obj['tweetlist'];
-                }
+            if (!isLoadMore) {
+              // first load
+              if (isHot) {
+                hotTweetsList = obj['tweetlist'];
               } else {
-                // load more
-                List list = new List();
-                list.addAll(normalTweetsList);
-                list.addAll(obj['tweetlist']);
-                normalTweetsList = list;
+                normalTweetsList = obj['tweetlist'];
               }
-              loading = false;
-            });
-//            filterList(hotTweetsList, true);
-//            filterList(normalTweetsList, false);
+            } else {
+              // load more
+              List list = new List();
+              list.addAll(normalTweetsList);
+              list.addAll(obj['tweetlist']);
+              normalTweetsList = list;
+            }
+            filterList(hotTweetsList, true);
+            filterList(normalTweetsList, false);
           }, params: params);
         });
       }
@@ -114,14 +111,13 @@ class TweetsListPageState extends State<TweetsListPage> {
   }
 
   // 根据黑名单过滤出新的数组
-  filterList(List<dynamic> list, bool isHot) {
-    print("call filterList method...");
-    BlackListUtils.getBlackListIds().then((list) {
-      if (list != null && list.isNotEmpty) {
+  filterList(List<dynamic> objList, bool isHot) {
+    BlackListUtils.getBlackListIds().then((intList) {
+      if (intList != null && intList.isNotEmpty && objList != null) {
         List newList = new List();
-        for (dynamic item in list) {
+        for (dynamic item in objList) {
           int authorId = item['authorid'];
-          if (!list.contains(authorId)) {
+          if (!intList.contains(authorId)) {
             newList.add(item);
           }
         }
@@ -134,11 +130,12 @@ class TweetsListPageState extends State<TweetsListPage> {
           loading = false;
         });
       } else {
+        // 黑名单为空，直接返回原始数据
         setState(() {
           if (isHot) {
-            hotTweetsList = list;
+            hotTweetsList = objList;
           } else {
-            normalTweetsList = list;
+            normalTweetsList = objList;
           }
           loading = false;
         });
@@ -165,7 +162,7 @@ class TweetsListPageState extends State<TweetsListPage> {
           height: 35.0,
           decoration: new BoxDecoration(
             shape: BoxShape.circle,
-            color: Colors.blue,
+            color: Colors.transparent,
             image: new DecorationImage(
                 image: new NetworkImage(listItem['portrait']),
                 fit: BoxFit.cover),
@@ -463,7 +460,17 @@ class TweetsListPageState extends State<TweetsListPage> {
         child: new Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            new Text("由于OSC的openapi限制，必须登录后才能获取动弹信息"),
+            new Container(
+              padding: const EdgeInsets.all(10.0),
+              child: new Center(
+                child: new Column(
+                  children: <Widget>[
+                    new Text("由于OSC的openapi限制"),
+                    new Text("必须登录后才能获取动弹信息")
+                  ],
+                ),
+              )
+            ),
             new InkWell(
               child: new Container(
                 padding: const EdgeInsets.fromLTRB(15.0, 8.0, 15.0, 8.0),
@@ -473,10 +480,14 @@ class TweetsListPageState extends State<TweetsListPage> {
                   borderRadius: new BorderRadius.all(new Radius.circular(5.0))
                 ),
               ),
-              onTap: () {
-                Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) {
+              onTap: () async {
+                final result = await Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) {
                   return LoginPage();
                 }));
+                if (result != null && result == "refresh") {
+                  // 通知动弹页面刷新
+                  Constants.eventBus.fire(new LoginEvent());
+                }
               },
             ),
           ],

@@ -48,7 +48,7 @@ class DataUtils {
   }
 
   // 保存用户个人信息
-  static saveUserInfo(Map data) async {
+  static Future<UserInfo> saveUserInfo(Map data) async {
     if (data != null) {
       SharedPreferences sp = await SharedPreferences.getInstance();
       String name = data['name'];
@@ -65,7 +65,18 @@ class DataUtils {
       await sp.setString(SP_USER_LOC, location);
       await sp.setString(SP_USER_EMAIL, email);
       await sp.setString(SP_USER_URL, url);
+      UserInfo userInfo = new UserInfo(
+        id: id,
+        name: name,
+        gender: gender,
+        avatar: avatar,
+        email: email,
+        location: location,
+        url: url
+      );
+      return userInfo;
     }
+    return null;
   }
 
   // 获取用户信息
