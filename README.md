@@ -1,5 +1,5 @@
 # FlutterOSC
-基于Google Flutter的开源中国客户端，支持Android和iOS。[GitHub戳这里](https://github.com/yubo725/FlutterOSC)
+基于Google Flutter的开源中国客户端，支持Android和iOS。[GitHub戳这里](https://github.com/yubo725/FlutterOSC) [关于Flutter](https://flutterchina.club/)
 
 # Android扫码下载APK
 <img src='./screenshots/qrcode.png'>
