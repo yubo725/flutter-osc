@@ -4,8 +4,8 @@
 - [关于Google Flutter](https://flutterchina.club/)
 
 # Android扫码下载APK
-请使用手机浏览器扫码下载，不要使用微信或者qq扫码
-<img src='./screenshots/qrcode.png'>
+- 请使用手机浏览器扫码下载，不要使用微信或者qq扫码
+- <img src='./screenshots/qrcode.png'>
 
 # 功能
 - [x] 登录（使用osc账号）
