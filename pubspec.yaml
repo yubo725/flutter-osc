@@ -9,7 +9,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.0
 
-  flutter_webview_plugin: "^0.1.5"
+  flutter_webview_plugin: "^0.1.6"
   image_picker: "^0.4.1"
 #  fluttertoast: "^2.0.3"
   shared_preferences: "^0.4.1"
