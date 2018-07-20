@@ -1,5 +1,4 @@
 import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 class NetUtils {
   static void get(String url, Function callback, {Map<String, String> params, Function errorCallback}) async {

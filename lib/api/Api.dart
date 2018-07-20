@@ -4,12 +4,6 @@ class Api {
   // 资讯列表
   static final String NEWS_LIST = "http://osc.yubo725.top/news/list";
 
-//  static final String NEWS_LIST = HOST + "/action/openapi/news_list";
-
-//  static final String NEWS_LIST = "http://192.168.100.200:8888";
-
-//  static final String NEWS_LIST = "http://192.168.2.244:8888";
-
   // 资讯详情
   static final String NEWS_DETAIL = HOST + "/action/openapi/news_detail";
 

@@ -20,7 +20,7 @@ class Utf8Utils {
       return null;
     }
     List<String> list = encodeStr.split(",");
-    if (list != null && !list.isEmpty) {
+    if (list != null && list.isNotEmpty) {
       List<int> intList = new List();
       for (String s in list) {
         intList.add(int.parse(s));
