@@ -103,7 +103,7 @@ class MyInfoPageState extends State<MyInfoPage> {
     String accessToken = sp.get(DataUtils.SP_AC_TOKEN);
     Map<String, String> params = new Map();
     params['access_token'] = accessToken;
-    NetUtils.get(Api.USER_INFO, (data) {
+    NetUtils.get(Api.USER_INFO, params: params).then((data) {
       if (data != null) {
         var map = json.decode(data);
         setState(() {
@@ -112,7 +112,7 @@ class MyInfoPageState extends State<MyInfoPage> {
         });
         DataUtils.saveUserInfo(map);
       }
-    }, params: params);
+    });
   }
 
   _login() async {

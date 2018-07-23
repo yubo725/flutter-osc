@@ -86,7 +86,7 @@ class TweetsListPageState extends State<TweetsListPage> {
           }
           params['pageSize'] = "20";
           params['dataType'] = "json";
-          NetUtils.get(Api.TWEETS_LIST, (data) {
+          NetUtils.get(Api.TWEETS_LIST, params: params).then((data) {
             Map<String, dynamic> obj = json.decode(data);
             if (!isLoadMore) {
               // first load
@@ -104,7 +104,7 @@ class TweetsListPageState extends State<TweetsListPage> {
             }
             filterList(hotTweetsList, true);
             filterList(normalTweetsList, false);
-          }, params: params);
+          });
         });
       }
     });
@@ -329,33 +329,28 @@ class TweetsListPageState extends State<TweetsListPage> {
         params['authorid'] = '$authorId';
         params['authoravatar'] = portrait;
         params['authorname'] = Utf8Utils.encode(nickname);
-        NetUtils.post(
-          Api.ADD_TO_BLACK,
-          (data) {
-            Navigator.of(context).pop();
-            if (data != null) {
-              var obj = json.decode(data);
-              if (obj['code'] == 0) {
-                // 添加到小黑屋成功
-                showAddBlackHouseResultDialog("添加到小黑屋成功！");
-                BlackListUtils.addBlackId(authorId).then((arg) {
-                  // 添加之后，重新过滤数据
-                  filterList(normalTweetsList, false);
-                  filterList(hotTweetsList, true);
-                });
-              } else {
-                // 添加失败
-                var msg = obj['msg'];
-                showAddBlackHouseResultDialog("添加到小黑屋失败：$msg");
-              }
+        NetUtils.post(Api.ADD_TO_BLACK, params: params).then((data) {
+          Navigator.of(context).pop();
+          if (data != null) {
+            var obj = json.decode(data);
+            if (obj['code'] == 0) {
+              // 添加到小黑屋成功
+              showAddBlackHouseResultDialog("添加到小黑屋成功！");
+              BlackListUtils.addBlackId(authorId).then((arg) {
+                // 添加之后，重新过滤数据
+                filterList(normalTweetsList, false);
+                filterList(hotTweetsList, true);
+              });
+            } else {
+              // 添加失败
+              var msg = obj['msg'];
+              showAddBlackHouseResultDialog("添加到小黑屋失败：$msg");
             }
-          },
-          params: params,
-          errorCallback: (e) {
-            // 请求出错
-            Navigator.of(context).pop();
-            showAddBlackHouseResultDialog("网络请求出错：$e");
-          });
+          }
+        }).catchError((e) {
+          Navigator.of(context).pop();
+          showAddBlackHouseResultDialog("网络请求出错：$e");
+        });
       }
     });
   }

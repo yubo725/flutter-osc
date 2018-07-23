@@ -69,7 +69,7 @@ class NewsListPageState extends State<NewsListPage> {
     String url = Api.NEWS_LIST;
     url += "?pageIndex=$curPage&pageSize=10";
     print("newsListUrl: $url");
-    NetUtils.get(url, (data) {
+    NetUtils.get(url).then((data) {
       if (data != null) {
         Map<String, dynamic> map = json.decode(data);
         if (map['code'] == 0) {
@@ -95,8 +95,6 @@ class NewsListPageState extends State<NewsListPage> {
           });
         }
       }
-    }, errorCallback: (e) {
-      print("get news list error: $e");
     });
   }
 

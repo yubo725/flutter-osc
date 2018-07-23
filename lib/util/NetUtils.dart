@@ -1,7 +1,8 @@
+import 'dart:async';
 import 'package:http/http.dart' as http;
 
 class NetUtils {
-  static void get(String url, Function callback, {Map<String, String> params, Function errorCallback}) async {
+  static Future<String> get(String url, {Map<String, String> params}) async {
     if (params != null && params.isNotEmpty) {
       StringBuffer sb = new StringBuffer("?");
       params.forEach((key, value) {
@@ -11,29 +12,12 @@ class NetUtils {
       paramStr = paramStr.substring(0, paramStr.length - 1);
       url += paramStr;
     }
-//    print("$url");
-    try {
-      http.Response res = await http.get(url);
-      if (callback != null) {
-        callback(res.body);
-      }
-    } catch (exception) {
-      if (errorCallback != null) {
-        errorCallback(exception);
-      }
-    }
+    http.Response res = await http.get(url);
+    return res.body;
   }
   
-  static void post(String url, Function callback, {Map<String, String> params, Function errorCallback}) async {
-    try {
-      http.Response res = await http.post(url, body: params);
-      if (callback != null) {
-        callback(res.body);
-      }
-    } catch (e) {
-      if (errorCallback != null) {
-        errorCallback(e);
-      }
-    }
+  static Future<String> post(String url, {Map<String, String> params}) async {
+    http.Response res = await http.post(url, body: params);
+    return res.body;
   }
 }

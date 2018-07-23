@@ -55,7 +55,7 @@ class TweetDetailPageState extends State<TweetDetailPage> {
           params['page'] = '$curPage';
           params['pageSize'] = '20';
           params['dataType'] = 'json';
-          NetUtils.get(Api.COMMENT_LIST, (data) {
+          NetUtils.get(Api.COMMENT_LIST, params: params).then((data) {
             setState(() {
               if (!isLoadMore) {
                 commentList = json.decode(data)['commentList'];
@@ -73,7 +73,7 @@ class TweetDetailPageState extends State<TweetDetailPage> {
                 commentList = list;
               }
             });
-          }, params: params);
+          });
         });
       }
     });
@@ -277,8 +277,7 @@ class TweetDetailPageState extends State<TweetDetailPage> {
             print("authorId: $authorId");
             params['isPostToMyZone'] = "0";
             params['dataType'] = "json";
-            NetUtils.get(Api.COMMENT_REPLY, (data) {
-              print("$data");
+            NetUtils.get(Api.COMMENT_REPLY, params: params).then((data) {
               if (data != null) {
                 var obj = json.decode(data);
                 var error = obj['error'];
@@ -288,7 +287,7 @@ class TweetDetailPageState extends State<TweetDetailPage> {
                   getReply(false);
                 }
               }
-            }, params: params);
+            });
           });
         }
       });

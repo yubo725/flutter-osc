@@ -31,7 +31,7 @@ class BlackHousePageState extends State<BlackHousePage> {
       if (userInfo != null) {
         String url = Api.QUERY_BLACK;
         url += "/${userInfo.id}";
-        NetUtils.get(url, (data) {
+        NetUtils.get(url).then((data) {
           if (data != null) {
             var obj = json.decode(data);
             if (obj['code'] == 0) {
@@ -40,8 +40,6 @@ class BlackHousePageState extends State<BlackHousePage> {
               });
             }
           }
-        }, errorCallback: (e) {
-          print("network error: $e");
         });
       } else {
         setState(() {
@@ -57,14 +55,14 @@ class BlackHousePageState extends State<BlackHousePage> {
     String accessToken = sp.get(DataUtils.SP_AC_TOKEN);
     Map<String, String> params = new Map();
     params['access_token'] = accessToken;
-    NetUtils.get(Api.USER_INFO, (data) {
+    NetUtils.get(Api.USER_INFO, params: params).then((data) {
       if (data != null) {
         var map = json.decode(data);
         DataUtils.saveUserInfo(map).then((userInfo) {
           queryBlackList();
         });
       }
-    }, params: params);
+    });
   }
 
   // 从黑名单中删除
@@ -75,27 +73,22 @@ class BlackHousePageState extends State<BlackHousePage> {
         Map<String, String> params = new Map();
         params['userid'] = userId;
         params['authorid'] = "$authorId";
-        NetUtils.get(
-          Api.DELETE_BLACK,
-          (data) {
-            Navigator.of(context).pop();
-            if (data != null) {
-              var obj = json.decode(data);
-              if (obj['code'] == 0) {
-                // 删除成功
-                BlackListUtils.removeBlackId(authorId);
-                queryBlackList();
-              } else {
-                showResultDialog("操作失败：${obj['msg']}");
-              }
+        NetUtils.get(Api.DELETE_BLACK, params: params).then((data) {
+          Navigator.of(context).pop();
+          if (data != null) {
+            var obj = json.decode(data);
+            if (obj['code'] == 0) {
+              // 删除成功
+              BlackListUtils.removeBlackId(authorId);
+              queryBlackList();
+            } else {
+              showResultDialog("操作失败：${obj['msg']}");
             }
-          },
-          params: params,
-          errorCallback: (e) {
-            print("delete from black error: $e");
-            Navigator.of(context).pop();
-            showResultDialog("网络请求失败：$e");
-          });
+          }
+        }).catchError((e) {
+          Navigator.of(context).pop();
+          showResultDialog("网络请求失败：$e");
+        });
       }
     });
   }
