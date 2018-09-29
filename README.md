@@ -3,6 +3,9 @@
 - [GitHub戳这里](https://github.com/yubo725/FlutterOSC) 
 - [关于Google Flutter](https://flutterchina.club/)
 
+# 注意
+有的朋友clone代码后跑不起来，原因是你的Flutter版本跟这个项目不一致，导致一些奇怪的错误，目前该项目已经更新了Flutter版本（当前该项目使用的Flutter版本为0.8.2）
+
 # Android扫码下载APK
 - 请使用手机浏览器扫码下载，不要使用微信或者qq扫码
 - <img src='./screenshots/qrcode.png'>
