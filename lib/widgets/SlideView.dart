@@ -10,7 +10,7 @@ class SlideView extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return new SlideViewState(data);
+    return new SlideViewState();
   }
 }
 
@@ -18,13 +18,10 @@ class SlideViewState extends State<SlideView> with SingleTickerProviderStateMixi
   TabController tabController;
   List slideData;
 
-  SlideViewState(data) {
-    slideData = data;
-  }
-
   @override
   void initState() {
     super.initState();
+    slideData = this.widget.data;
     tabController = new TabController(length: slideData == null ? 0 : slideData.length, vsync: this);
   }
 
@@ -59,7 +56,7 @@ class SlideViewState extends State<SlideView> with SingleTickerProviderStateMixi
           },
           child: new Stack(
             children: <Widget>[
-              new Image.network(imgUrl),
+              new Image.network(imgUrl, width: MediaQuery.of(context).size.width),
               new Container(
                 width: MediaQuery.of(context).size.width,
                 color: const Color(0x50000000),
