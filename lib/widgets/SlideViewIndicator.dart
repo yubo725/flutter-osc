@@ -10,9 +10,9 @@ class SlideViewIndicator extends StatefulWidget {
     this.state = new SlideViewIndicatorState();
   }
 
-  setSelectedIndex(int index) {
-    this.state.setSelectedIndex(index);
-  }
+//  setSelectedIndex(int index) {
+//    this.state.setSelectedIndex(index);
+//  }
 
   @override
   State<StatefulWidget> createState() => this.state;
@@ -59,6 +59,7 @@ class SlideViewIndicatorState extends State<SlideViewIndicator> {
     return new Container(
       height: 30.0,
       color: const Color(0x00000000),
+      margin: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 5.0),
       child: new Center(
         child: new Row(
           children: dots,

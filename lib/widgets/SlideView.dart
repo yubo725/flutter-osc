@@ -27,7 +27,9 @@ class SlideViewState extends State<SlideView> with SingleTickerProviderStateMixi
     slideData = this.widget.data;
     tabController = new TabController(length: slideData == null ? 0 : slideData.length, vsync: this);
     tabController.addListener(() {
-      this.widget.slideViewIndicator.setSelectedIndex(tabController.index);
+      if (this.widget.slideViewIndicator.state.mounted) {
+        this.widget.slideViewIndicator.state.setSelectedIndex(tabController.index);
+      }
     });
   }
 

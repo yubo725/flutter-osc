@@ -24,6 +24,8 @@ class NewsListPageState extends State<NewsListPage> {
   ScrollController _controller = new ScrollController();
   TextStyle titleTextStyle = new TextStyle(fontSize: 15.0);
   TextStyle subtitleStyle = new TextStyle(color: const Color(0xFFB5BDC0), fontSize: 12.0);
+  SlideView slideView;
+  SlideViewIndicator indicator;
 
   NewsListPageState() {
     _controller.addListener(() {
@@ -106,16 +108,20 @@ class NewsListPageState extends State<NewsListPage> {
               // 轮播图数据
               slideData = _slideData;
             }
+            initSlider();
           });
         }
       }
     });
   }
 
+  void initSlider() {
+    indicator = new SlideViewIndicator(slideData.length);
+    slideView = new SlideView(slideData, indicator);
+  }
+
   Widget renderRow(i) {
     if (i == 0) {
-      SlideViewIndicator indicator = new SlideViewIndicator(slideData.length);
-      SlideView slideView = new SlideView(slideData, indicator);
       return new Container(
         height: 180.0,
         child: new Stack(
