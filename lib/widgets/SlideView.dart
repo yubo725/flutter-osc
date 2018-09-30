@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import '../pages/NewsDetailPage.dart';
+import 'SlideViewIndicator.dart';
 
 class SlideView extends StatefulWidget {
   var data;
+  SlideViewIndicator slideViewIndicator;
 
-  SlideView(data) {
+  SlideView(data, indicator) {
     this.data = data;
+    this.slideViewIndicator = indicator;
   }
 
   @override
@@ -23,6 +26,9 @@ class SlideViewState extends State<SlideView> with SingleTickerProviderStateMixi
     super.initState();
     slideData = this.widget.data;
     tabController = new TabController(length: slideData == null ? 0 : slideData.length, vsync: this);
+    tabController.addListener(() {
+      this.widget.slideViewIndicator.setSelectedIndex(tabController.index);
+    });
   }
 
   @override
@@ -56,7 +62,7 @@ class SlideViewState extends State<SlideView> with SingleTickerProviderStateMixi
           },
           child: new Stack(
             children: <Widget>[
-              new Image.network(imgUrl, width: MediaQuery.of(context).size.width),
+              new Image.network(imgUrl, width: MediaQuery.of(context).size.width, fit: BoxFit.contain),
               new Container(
                 width: MediaQuery.of(context).size.width,
                 color: const Color(0x50000000),
@@ -70,6 +76,11 @@ class SlideViewState extends State<SlideView> with SingleTickerProviderStateMixi
         ));
       }
     }
+//    items.add(new Container(
+//      color: const Color(0x00000000),
+//      alignment: Alignment.bottomCenter,
+//      child: new SlideViewIndicator(slideData.length),
+//    ));
     return new TabBarView(
       controller: tabController,
       children: items,

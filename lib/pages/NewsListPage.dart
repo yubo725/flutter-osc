@@ -7,6 +7,7 @@ import '../constants/Constants.dart';
 import '../widgets/SlideView.dart';
 import '../pages/NewsDetailPage.dart';
 import '../widgets/CommonEndLine.dart';
+import '../widgets/SlideViewIndicator.dart';
 
 class NewsListPage extends StatefulWidget {
   @override
@@ -113,9 +114,19 @@ class NewsListPageState extends State<NewsListPage> {
 
   Widget renderRow(i) {
     if (i == 0) {
+      SlideViewIndicator indicator = new SlideViewIndicator(slideData.length);
+      SlideView slideView = new SlideView(slideData, indicator);
       return new Container(
         height: 180.0,
-        child: new SlideView(slideData),
+        child: new Stack(
+          children: <Widget>[
+            slideView,
+            new Container(
+              alignment: Alignment.bottomCenter,
+              child: indicator,
+            )
+          ],
+        ),
       );
     }
     i -= 1;
