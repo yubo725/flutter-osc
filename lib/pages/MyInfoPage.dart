@@ -4,6 +4,7 @@ import 'package:flutter_osc/events/LoginEvent.dart';
 import 'package:flutter_osc/events/LogoutEvent.dart';
 import '../pages/CommonWebPage.dart';
 import '../pages/LoginPage.dart';
+import '../pages/NewLoginPage.dart';
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../api/Api.dart';
@@ -120,7 +121,7 @@ class MyInfoPageState extends State<MyInfoPage> {
     final result = await Navigator
         .of(context)
         .push(new MaterialPageRoute(builder: (context) {
-      return new LoginPage();
+      return new NewLoginPage();
     }));
     // result为"refresh"代表登录成功
     if (result != null && result == "refresh") {
