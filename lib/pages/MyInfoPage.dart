@@ -121,7 +121,7 @@ class MyInfoPageState extends State<MyInfoPage> {
     final result = await Navigator
         .of(context)
         .push(new MaterialPageRoute(builder: (context) {
-      return new NewLoginPage();
+      return new LoginPage();
     }));
     // result为"refresh"代表登录成功
     if (result != null && result == "refresh") {

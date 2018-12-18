@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:async/async.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
 import '../api/Api.dart';
 import 'package:http/http.dart' as http;
 import '../util/DataUtils.dart';
@@ -177,7 +176,7 @@ class PublishTweetPageState extends State<PublishTweetPage> {
       params['msg'] = content;
       params['access_token'] = token;
       // 构造一个MultipartRequest对象用于上传图片
-      var request = new MultipartRequest('POST', Uri.parse(Api.PUB_TWEET));
+      var request = new http.MultipartRequest('POST', Uri.parse(Api.PUB_TWEET));
       request.fields.addAll(params);
       if (fileList != null && fileList.length > 0) {
         // 这里虽然是添加了多个图片文件，但是开源中国提供的接口只接收一张图片

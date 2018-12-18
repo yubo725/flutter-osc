@@ -37,7 +37,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   barcode_scan: 8288e70cb430072003bce2c794a1431e7adbcb4d
   Flutter: 9d0fac939486c9aba2809b7982dfdbb47a7b0296
-  flutter_webview_plugin: 116575b48572029304775b768e9f15ebfc316274
+  flutter_webview_plugin: 0b491d31c34ab5c86a71c9f1a57ac000dd1b75e9
   image_picker: ee00aab0487cedc80a304085219503cc6d0f2e22
   MTBBarcodeScanner: bb0bb62e18b57f8a571a482248adc20722b70a91
   shared_preferences: 5a1d487c427ee18fcd3ea1f2a131569481834b53
