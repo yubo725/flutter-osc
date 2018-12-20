@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_osc/constants/Constants.dart';
 import 'package:flutter_osc/events/LoginEvent.dart';
+import 'package:flutter_osc/pages/NewLoginPage.dart';
 import 'package:flutter_osc/util/BlackListUtils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../util/NetUtils.dart';
@@ -153,7 +154,7 @@ class BlackHousePageState extends State<BlackHousePage> {
           ),
           onTap: () async {
             final result = await Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) {
-              return LoginPage();
+              return NewLoginPage();
             }));
             if (result != null && result == "refresh") {
               // 通知动弹页面刷新

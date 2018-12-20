@@ -1,7 +1,10 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_osc/constants/Constants.dart';
+import 'package:flutter_osc/pages/LoginPage.dart';
+import 'package:flutter_osc/util/DataUtils.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
 // 新的登录界面，隐藏WebView登录页面
@@ -11,6 +14,15 @@ class NewLoginPage extends StatefulWidget {
 }
 
 class NewLoginPageState extends State<NewLoginPage> {
+  // 首次加载登录页
+  static const int stateFirstLoad = 1;
+  // 加载完毕登录页，且当前页面是输入账号密码的页面
+  static const int stateLoadedInputPage = 2;
+  // 加载完毕登录页，且当前页面不是输入账号密码的页面
+  static const int stateLoadedNotInputPage = 3;
+
+  int curState = stateFirstLoad;
+
   // 标记是否是加载中
   bool loading = true;
   // 标记当前页面是否是我们自定义的回调页面
@@ -23,7 +35,6 @@ class NewLoginPageState extends State<NewLoginPage> {
   final scriptCheckIsInputAccountPage = "document.getElementById('f_email') != null";
 
   final jsCtrl = new TextEditingController(text: 'document.getElementById(\'f_email\') != null');
-//  final jsCtrl = new TextEditingController(text: "document.getElementById('f_email').value='yubo725@qq.com';document.getElementById('f_pwd').value='android#1991'");
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
 
   // URL变化监听器
@@ -36,7 +47,7 @@ class NewLoginPageState extends State<NewLoginPage> {
   @override
   void initState() {
     super.initState();
-    // 监听WebView的加载事件，该监听器已不起作用，不回调
+    // 监听WebView的加载事件
     _onStateChanged = flutterWebViewPlugin.onStateChanged.listen((WebViewStateChanged state) {
       // state.type是一个枚举类型，取值有：WebViewState.shouldStart, WebViewState.startLoad, WebViewState.finishLoad
       switch (state.type) {
@@ -58,9 +69,27 @@ class NewLoginPageState extends State<NewLoginPage> {
           });
           if (isLoadingCallbackPage) {
             // 当前是回调页面，则调用js方法获取数据
-//            parseResult();
+            parseResult();
           }
           print('finishLoad');
+          switch (curState) {
+            case stateFirstLoad:
+            case stateLoadedInputPage:
+              // 首次加载完登录页，判断是否是输入账号密码的界面
+              isInputPage().then((result) {
+                if ("true".compareTo(result) == 0) {
+                  // 是输入账号的页面，则直接填入账号密码并模拟点击登录按钮
+//                  autoLogin();
+                } else {
+                  // 不是输入账号的页面，则需要模拟点击"换个账号"按钮
+                  redirectToInputPage();
+                }
+              });
+              break;
+            case stateLoadedNotInputPage:
+              // 不是输入账号密码的界面，则需要模拟点击"换个账号"按钮
+              break;
+          }
           break;
       }
     });
@@ -73,8 +102,74 @@ class NewLoginPageState extends State<NewLoginPage> {
     });
   }
 
+  // 检查当前WebView是否是输入账号密码的页面
+  Future<String> isInputPage() async {
+    return await flutterWebViewPlugin.evalJavascript("document.getElementById('f_email') != null");
+  }
+
+  // 跳转到输入界面
+  redirectToInputPage() {
+    curState = stateLoadedInputPage;
+    String js = "document.getElementsByClassName('userbar')[0].getElementsByTagName('a')[1].click()";
+    flutterWebViewPlugin.evalJavascript(js);
+  }
+
+  // 自动登录
+  void autoLogin(String account, String pwd) {
+    // 填账号
+    String jsInputAccount = "document.getElementById('f_email').value='$account'";
+    // 填密码
+    String jsInputPwd = "document.getElementById('f_pwd').value='$pwd'";
+    // 点击"连接"按钮
+    String jsClickLoginBtn = "document.getElementsByClassName('rndbutton')[0].click()";
+    // 执行上面3条js语句
+    flutterWebViewPlugin.evalJavascript("$jsInputAccount;$jsInputPwd;$jsClickLoginBtn");
+  }
+
+  // 解析WebView中的数据
+  void parseResult() {
+    flutterWebViewPlugin.evalJavascript("get();").then((result) {
+      // result json字符串，包含token信息
+      if (result != null && result.length > 0) {
+        // 拿到了js中的数据
+        try {
+          // what the fuck?? need twice decode??
+          var map = json.decode(result); // s is String
+          if (map is String) {
+            map = json.decode(map); // map is Map
+          }
+          if (map != null) {
+            // 登录成功，取到了token，关闭当前页面
+            DataUtils.saveLoginInfo(map);
+            Navigator.pop(context, "refresh");
+          }
+        } catch (e) {
+          print("parse login result error: $e");
+        }
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    var loginBtn = new Builder(builder: (ctx) {
+      return new RaisedButton(
+        child: new Text("登录"),
+        onPressed: () {
+          // 拿到用户输入的账号密码
+          String username = usernameCtrl.text.trim();
+          String password = passwordCtrl.text.trim();
+          if (username.isEmpty || password.isEmpty) {
+            Scaffold.of(ctx).showSnackBar(new SnackBar(
+              content: new Text("账号和密码不能为空！"),
+            ));
+            return;
+          }
+          // 发送给webview，让webview登录后再取回token
+          autoLogin(username, password);
+        },
+      );
+    });
     return new Scaffold(
       appBar: new AppBar(
         title: new Text("登录", style: new TextStyle(color: Colors.white)),
@@ -86,11 +181,11 @@ class NewLoginPageState extends State<NewLoginPage> {
           children: <Widget>[
             new Container(
               width: MediaQuery.of(context).size.width,
-              height: 200.0,
+              height: 0.0,
               child: new WebviewScaffold(
                 key: _scaffoldKey,
                 url: Constants.LOGIN_URL, // 登录的URL
-                hidden: false,
+                hidden: true,
                 withZoom: true,  // 允许网页缩放
                 withLocalStorage: true, // 允许LocalStorage
                 withJavascript: true, // 允许执行js代码
@@ -139,29 +234,25 @@ class NewLoginPageState extends State<NewLoginPage> {
               ],
             ),
             new Container(height: 20.0),
-            new RaisedButton(
-              child: new Text("登录"),
-              onPressed: () {
-                // 拿到用户输入的账号密码
-                String username = usernameCtrl.text;
-                String password = passwordCtrl.text;
-                // 发送给webview，让webview登录后再取回token
-                print("username = $username, password = $password");
-              },
-            ),
-            new TextField(
-              controller: jsCtrl,
-            ),
-            new RaisedButton(
-              child: new Text("Eval"),
-              onPressed: () {
-                var jsStr = jsCtrl.text;
-                if (jsStr != null) {
-                  flutterWebViewPlugin.evalJavascript(jsStr).then((result) {
-                    print(result);
-                  });
-                }
-              },
+            loginBtn,
+            new Expanded(
+              child: new Container(
+                margin: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 10.0),
+                alignment: Alignment.bottomCenter,
+                child: new InkWell(
+                  child: new Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: new Text("使用WebView登录方式", style: new TextStyle(fontSize: 13.0, color: Colors.blue))
+                  ),
+                  onTap: () {
+                    Navigator.pop(context);
+                    // 跳转到LoginPage
+                    Navigator.push(context, new MaterialPageRoute(builder: (context) {
+                      return new LoginPage();
+                    }));
+                  },
+                ),
+              ),
             )
           ],
         ),
