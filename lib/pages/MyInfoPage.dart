@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_osc/constants/Constants.dart';
+import 'package:flutter_osc/events/ChangeThemeEvent.dart';
 import 'package:flutter_osc/events/LoginEvent.dart';
 import 'package:flutter_osc/events/LogoutEvent.dart';
+import 'package:flutter_osc/util/ThemeUtils.dart';
 import '../pages/CommonWebPage.dart';
 import '../pages/LoginPage.dart';
 import '../pages/NewLoginPage.dart';
@@ -20,6 +22,8 @@ class MyInfoPage extends StatefulWidget {
 }
 
 class MyInfoPageState extends State<MyInfoPage> {
+  Color themeColor = ThemeUtils.currentColorTheme;
+
   static const double IMAGE_ICON_WIDTH = 30.0;
   static const double ARROW_ICON_WIDTH = 16.0;
 
@@ -60,6 +64,11 @@ class MyInfoPageState extends State<MyInfoPage> {
     Constants.eventBus.on<LoginEvent>().listen((event) {
       // 收到登录的消息，重新获取个人信息
       getUserInfo();
+    });
+    Constants.eventBus.on<ChangeThemeEvent>().listen((event) {
+      setState(() {
+        themeColor = event.color;
+      });
     });
   }
 
@@ -137,7 +146,7 @@ class MyInfoPageState extends State<MyInfoPage> {
   renderRow(i) {
     if (i == 0) {
       var avatarContainer = new Container(
-        color: const Color(0xff63ca6c),
+        color: themeColor,
         height: 200.0,
         child: new Center(
           child: new Column(

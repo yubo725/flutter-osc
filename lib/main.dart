@@ -1,5 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_osc/constants/Constants.dart';
+import 'package:flutter_osc/events/ChangeThemeEvent.dart';
+import 'package:flutter_osc/util/DataUtils.dart';
+import 'package:flutter_osc/util/ThemeUtils.dart';
 import 'pages/NewsListPage.dart';
 import 'pages/TweetsListPage.dart';
 import 'pages/DiscoveryPage.dart';
@@ -16,6 +20,7 @@ class MyOSCClient extends StatefulWidget {
 }
 
 class MyOSCClientState extends State<MyOSCClient> {
+  Color themeColor = ThemeUtils.currentColorTheme;
   int _tabIndex = 0;
   final tabTextStyleNormal = new TextStyle(color: const Color(0xff969696));
   final tabTextStyleSelected = new TextStyle(color: const Color(0xff63ca6c));
@@ -26,6 +31,22 @@ class MyOSCClientState extends State<MyOSCClient> {
 
   Image getTabImage(path) {
     return new Image.asset(path, width: 20.0, height: 20.0);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    DataUtils.getColorThemeIndex().then((index) {
+      print('color theme index = $index');
+      if (index != null) {
+        Constants.eventBus.fire(new ChangeThemeEvent(ThemeUtils.supportColors[index]));
+      }
+    });
+    Constants.eventBus.on<ChangeThemeEvent>().listen((event) {
+      setState(() {
+        themeColor = event.color;
+      });
+    });
   }
 
   void initData() {
@@ -83,7 +104,7 @@ class MyOSCClientState extends State<MyOSCClient> {
     initData();
     return new MaterialApp(
       theme: new ThemeData(
-          primaryColor: const Color(0xFF63CA6C)
+          primaryColor: themeColor
       ),
       home: new Scaffold(
         appBar: new AppBar(

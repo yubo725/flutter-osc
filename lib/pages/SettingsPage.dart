@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_osc/constants/Constants.dart';
 import 'package:flutter_osc/events/LogoutEvent.dart';
+import 'package:flutter_osc/pages/ChangeThemePage.dart';
 import '../util/DataUtils.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -24,8 +25,9 @@ class SettingsPage extends StatelessWidget {
   SettingsPage() {
     listData.add(TAG_BLANK);
     listData.add(TAG_START);
-    listData.add(
-        new ListItem(title: '退出登录', icon: 'images/ic_discover_nearby.png'));
+    listData.add(new ListItem(title: '切换主题', icon: 'images/ic_discover_nearby.png'));
+    listData.add(TAG_CENTER);
+    listData.add(new ListItem(title: '退出登录', icon: 'images/ic_discover_nearby.png'));
     listData.add(TAG_END);
   }
 
@@ -93,6 +95,10 @@ class SettingsPage extends StatelessWidget {
               Constants.eventBus.fire(new LogoutEvent());
               print("event fired!");
             });
+          } else if (title == '切换主题') {
+            Navigator.push(ctx, new MaterialPageRoute(builder: (ctx) {
+              return new ChangeThemePage();
+            }));
           }
         },
         child: listItemContent,
