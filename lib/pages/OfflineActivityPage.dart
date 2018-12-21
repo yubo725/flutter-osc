@@ -155,6 +155,7 @@ class OfflineActivityPageState extends State<OfflineActivityPage> {
         length: 3,
         child: new Scaffold(
             appBar: new TabBar(
+              labelColor: Colors.black,
               tabs: <Widget>[
                 new Tab(
                   text: "强力推荐",

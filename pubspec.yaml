@@ -24,7 +24,7 @@ dependencies:
   image_picker: ^0.4.10
   shared_preferences: ^0.4.3
   event_bus: ^1.0.1
-  barcode_scan: ^0.0.8
+  barcode_scan: ^0.0.4
 
 dev_dependencies:
   flutter_test:

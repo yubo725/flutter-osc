@@ -493,6 +493,7 @@ class TweetsListPageState extends State<TweetsListPage> {
       length: 2,
       child: new Scaffold(
         appBar: new TabBar(
+          labelColor: Colors.black,
           tabs: <Widget>[
             new Tab(text: "动弹列表"),
             new Tab(text: "热门动弹")
