@@ -25,6 +25,11 @@
 # 截图
 #### iOS
 <div>
+    <img src='./screenshots/ios-theme-01.png' width=280>
+    <img src='./screenshots/ios-theme-02.png' width=280>
+    <img src='./screenshots/ios-theme-10.png' width=280>
+</div>
+<div>
     <img src='./screenshots/ios01.png' width=280>
     <img src='./screenshots/ios02.png' width=280>
     <img src='./screenshots/ios10.png' width=280>
