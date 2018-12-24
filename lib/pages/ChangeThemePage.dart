@@ -31,6 +31,7 @@ class ChangeThemePageState extends State<ChangeThemePage> {
           children: new List.generate(colors.length, (index) {
             return new InkWell(
               onTap: () {
+                ThemeUtils.currentColorTheme = colors[index];
                 DataUtils.setColorTheme(index);
                 changeColorTheme(colors[index]);
               },

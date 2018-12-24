@@ -39,6 +39,7 @@ class MyOSCClientState extends State<MyOSCClient> {
     DataUtils.getColorThemeIndex().then((index) {
       print('color theme index = $index');
       if (index != null) {
+        ThemeUtils.currentColorTheme = ThemeUtils.supportColors[index];
         Constants.eventBus.fire(new ChangeThemeEvent(ThemeUtils.supportColors[index]));
       }
     });

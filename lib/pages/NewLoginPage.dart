@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_osc/constants/Constants.dart';
 import 'package:flutter_osc/pages/LoginPage.dart';
 import 'package:flutter_osc/util/DataUtils.dart';
+import 'package:flutter_osc/util/ThemeUtils.dart';
+import 'package:flutter_osc/widgets/CommonButton.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
 // 新的登录界面，隐藏WebView登录页面
@@ -27,6 +29,8 @@ class NewLoginPageState extends State<NewLoginPage> {
   bool loading = true;
   // 标记当前页面是否是我们自定义的回调页面
   bool isLoadingCallbackPage = false;
+  // 是否正在登录
+  bool isOnLogin = false;
 
   final usernameCtrl = new TextEditingController(text: '');
   final passwordCtrl = new TextEditingController(text: '');
@@ -116,6 +120,9 @@ class NewLoginPageState extends State<NewLoginPage> {
 
   // 自动登录
   void autoLogin(String account, String pwd) {
+    setState(() {
+      isOnLogin = true;
+    });
     // 填账号
     String jsInputAccount = "document.getElementById('f_email').value='$account'";
     // 填密码
@@ -153,23 +160,38 @@ class NewLoginPageState extends State<NewLoginPage> {
   @override
   Widget build(BuildContext context) {
     var loginBtn = new Builder(builder: (ctx) {
-      return new RaisedButton(
-        child: new Text("登录"),
-        onPressed: () {
-          // 拿到用户输入的账号密码
-          String username = usernameCtrl.text.trim();
-          String password = passwordCtrl.text.trim();
-          if (username.isEmpty || password.isEmpty) {
-            Scaffold.of(ctx).showSnackBar(new SnackBar(
-              content: new Text("账号和密码不能为空！"),
-            ));
-            return;
-          }
-          // 发送给webview，让webview登录后再取回token
-          autoLogin(username, password);
-        },
-      );
+      return new CommonButton(text: "登录", onTap: () {
+        if (isOnLogin) return;
+        // 拿到用户输入的账号密码
+        String username = usernameCtrl.text.trim();
+        String password = passwordCtrl.text.trim();
+        if (username.isEmpty || password.isEmpty) {
+          Scaffold.of(ctx).showSnackBar(new SnackBar(
+            content: new Text("账号和密码不能为空！"),
+          ));
+          return;
+        }
+        // 发送给webview，让webview登录后再取回token
+        autoLogin(username, password);
+      });
     });
+    var loadingView;
+    if (isOnLogin) {
+      loadingView = new Center(
+        child: new Padding(
+          padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
+          child: new Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              CupertinoActivityIndicator(),
+              Text("登录中，请稍等...")
+            ],
+          ),
+        )
+      );
+    } else {
+      loadingView = new Center();
+    }
     return new Scaffold(
       appBar: new AppBar(
         title: new Text("登录", style: new TextStyle(color: Colors.white)),
@@ -236,23 +258,30 @@ class NewLoginPageState extends State<NewLoginPage> {
             new Container(height: 20.0),
             loginBtn,
             new Expanded(
-              child: new Container(
-                margin: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 10.0),
-                alignment: Alignment.bottomCenter,
-                child: new InkWell(
-                  child: new Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: new Text("使用WebView登录方式", style: new TextStyle(fontSize: 13.0, color: Colors.blue))
+              child: new Column(
+                children: <Widget>[
+                  new Expanded(
+                    child: loadingView
                   ),
-                  onTap: () {
-                    Navigator.pop(context);
-                    // 跳转到LoginPage
-                    Navigator.push(context, new MaterialPageRoute(builder: (context) {
-                      return new LoginPage();
-                    }));
-                  },
-                ),
-              ),
+                  new Container(
+                    margin: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 10.0),
+                    alignment: Alignment.bottomCenter,
+                    child: new InkWell(
+                      child: new Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: new Text("使用WebView登录方式", style: new TextStyle(fontSize: 13.0, color: ThemeUtils.currentColorTheme))
+                      ),
+                      onTap: () {
+                        Navigator.pop(context);
+                        // 跳转到LoginPage
+                        Navigator.push(context, new MaterialPageRoute(builder: (context) {
+                          return new LoginPage();
+                        }));
+                      },
+                    ),
+                  ),
+                ],
+              )
             )
           ],
         ),
