@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_osc/util/ThemeUtils.dart';
 
 class CommonButton extends StatefulWidget {
-  String text;
-  GestureTapCallback onTap;
+  final String text;
+  final GestureTapCallback onTap;
   
   CommonButton({@required this.text, @required this.onTap});
   
