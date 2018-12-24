@@ -27,7 +27,7 @@
 <div>
     <img src='./screenshots/ios-theme-01.png' width=280>
     <img src='./screenshots/ios-theme-02.png' width=280>
-    <img src='./screenshots/ios-theme-10.png' width=280>
+    <img src='./screenshots/ios-theme-03.png' width=280>
 </div>
 <div>
     <img src='./screenshots/ios01.png' width=280>
