@@ -11,38 +11,34 @@ import '../widgets/SlideViewIndicator.dart';
 
 class NewsListPage extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() {
-    return new NewsListPageState();
-  }
+  State<StatefulWidget> createState() => new NewsListPageState();
 }
 
 class NewsListPageState extends State<NewsListPage> {
+  final ScrollController _controller = new ScrollController();
+  final TextStyle titleTextStyle = new TextStyle(fontSize: 15.0);
+  final TextStyle subtitleStyle = new TextStyle(color: const Color(0xFFB5BDC0), fontSize: 12.0);
+
   var listData;
   var slideData;
   var curPage = 1;
-  var listTotalSize = 0;
-  ScrollController _controller = new ScrollController();
-  TextStyle titleTextStyle = new TextStyle(fontSize: 15.0);
-  TextStyle subtitleStyle = new TextStyle(color: const Color(0xFFB5BDC0), fontSize: 12.0);
   SlideView slideView;
+  var listTotalSize = 0;
   SlideViewIndicator indicator;
 
-  NewsListPageState() {
+  @override
+  void initState() {
+    super.initState();
     _controller.addListener(() {
       var maxScroll = _controller.position.maxScrollExtent;
       var pixels = _controller.position.pixels;
       if (maxScroll == pixels && listData.length < listTotalSize) {
         // scroll to bottom, get next page data
-        print("load more ... ");
+//        print("load more ... ");
         curPage++;
         getNewsList(true);
       }
     });
-  }
-
-  @override
-  void initState() {
-    super.initState();
     getNewsList(false);
   }
 

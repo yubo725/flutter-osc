@@ -20,14 +20,16 @@ class MyOSCClient extends StatefulWidget {
 }
 
 class MyOSCClientState extends State<MyOSCClient> {
+  final appBarTitles = ['资讯', '动弹', '发现', '我的'];
+  final tabTextStyleSelected = new TextStyle(color: const Color(0xff63ca6c));
+  final tabTextStyleNormal = new TextStyle(color: const Color(0xff969696));
+
   Color themeColor = ThemeUtils.currentColorTheme;
   int _tabIndex = 0;
-  final tabTextStyleNormal = new TextStyle(color: const Color(0xff969696));
-  final tabTextStyleSelected = new TextStyle(color: const Color(0xff63ca6c));
 
   var tabImages;
   var _body;
-  var appBarTitles = ['资讯', '动弹', '发现', '我的'];
+  var pages;
 
   Image getTabImage(path) {
     return new Image.asset(path, width: 20.0, height: 20.0);
@@ -48,9 +50,12 @@ class MyOSCClientState extends State<MyOSCClient> {
         themeColor = event.color;
       });
     });
-  }
-
-  void initData() {
+    pages = <Widget>[
+      new NewsListPage(),
+      new TweetsListPage(),
+      new DiscoveryPage(),
+      new MyInfoPage()
+    ];
     if (tabImages == null) {
       tabImages = [
         [
@@ -71,15 +76,6 @@ class MyOSCClientState extends State<MyOSCClient> {
         ]
       ];
     }
-    _body = new IndexedStack(
-      children: <Widget>[
-        new NewsListPage(),
-        new TweetsListPage(),
-        new DiscoveryPage(),
-        new MyInfoPage()
-      ],
-      index: _tabIndex,
-    );
   }
 
   TextStyle getTabTextStyle(int curIndex) {
@@ -102,7 +98,10 @@ class MyOSCClientState extends State<MyOSCClient> {
 
   @override
   Widget build(BuildContext context) {
-    initData();
+    _body = new IndexedStack(
+      children: pages,
+      index: _tabIndex,
+    );
     return new MaterialApp(
       theme: new ThemeData(
           primaryColor: themeColor
