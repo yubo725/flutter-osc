@@ -60,11 +60,9 @@ class NewLoginPageState extends State<NewLoginPage> {
           setState(() {
             loading = true;
           });
-          print('shouldStart');
           break;
         case WebViewState.startLoad:
           // 开始加载
-          print('startLoad');
           break;
         case WebViewState.finishLoad:
           // 加载完成
@@ -72,10 +70,12 @@ class NewLoginPageState extends State<NewLoginPage> {
             loading = false;
           });
           if (isLoadingCallbackPage) {
-            // 当前是回调页面，则调用js方法获取数据
-            parseResult();
+            // 当前是回调页面，则调用js方法获取数据，延迟加载防止get()获取不到数据
+            new Timer(const Duration(seconds: 1), () {
+              parseResult();
+            });
+            return;
           }
-          print('finishLoad');
           switch (curState) {
             case stateFirstLoad:
             case stateLoadedInputPage:
@@ -102,6 +102,7 @@ class NewLoginPageState extends State<NewLoginPage> {
       // 该页面会接收code，然后根据code换取AccessToken，并将获取到的token及其他信息，通过js的get()方法返回
       if (url != null && url.length > 0 && url.contains("osc/osc.php?code=")) {
         isLoadingCallbackPage = true;
+        print("URL变为回调页");
       }
     });
   }
@@ -154,6 +155,8 @@ class NewLoginPageState extends State<NewLoginPage> {
           print("parse login result error: $e");
         }
       }
+    }).catchError((error) {
+      print("get() error: $error");
     });
   }
 
@@ -271,12 +274,15 @@ class NewLoginPageState extends State<NewLoginPage> {
                           padding: const EdgeInsets.all(10.0),
                           child: new Text("使用WebView登录方式", style: new TextStyle(fontSize: 13.0, color: ThemeUtils.currentColorTheme))
                       ),
-                      onTap: () {
-                        Navigator.pop(context);
+                      onTap: () async {
+//                        Navigator.pop(context);
                         // 跳转到LoginPage
-                        Navigator.push(context, new MaterialPageRoute(builder: (context) {
+                        final result = await Navigator.push(context, new MaterialPageRoute(builder: (context) {
                           return new LoginPage();
                         }));
+                        if (result != null && result == "refresh") {
+                          Navigator.pop(context, "refresh");
+                        }
                       },
                     ),
                   ),
