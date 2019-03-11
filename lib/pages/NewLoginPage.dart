@@ -174,6 +174,8 @@ class NewLoginPageState extends State<NewLoginPage> {
           ));
           return;
         }
+        // 关闭键盘
+        FocusScope.of(context).requestFocus(FocusNode());
         // 发送给webview，让webview登录后再取回token
         autoLogin(username, password);
       });

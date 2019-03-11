@@ -35,14 +35,10 @@ class MyDrawer extends StatelessWidget {
       constraints: const BoxConstraints.expand(width: 304.0),
       child: new Material(
         elevation: 16.0,
-        child: new Container(
-          decoration: new BoxDecoration(
-            color: const Color(0xFFFFFFFF),
-          ),
-          child: new ListView.builder(
-            itemCount: menuTitles.length * 2 + 1,
-            itemBuilder: renderRow,
-          ),
+        child: new ListView.builder(
+          itemCount: menuTitles.length * 2 + 1,
+          itemBuilder: renderRow,
+          padding: const EdgeInsets.all(0.0), // 加上这一行可以让Drawer展开时，状态栏中不显示白色
         ),
       ),
     );

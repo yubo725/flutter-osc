@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 class Utf8Utils {
-  
   static String encode(String origin) {
     if (origin == null || origin.length == 0) {
       return null;
@@ -14,7 +13,7 @@ class Utf8Utils {
     String result = sb.toString();
     return result.substring(0, result.length - 1);
   }
-  
+
   static String decode(String encodeStr) {
     if (encodeStr == null || encodeStr.length == 0) {
       return null;
@@ -29,5 +28,4 @@ class Utf8Utils {
     }
     return null;
   }
-  
 }

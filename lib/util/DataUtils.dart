@@ -69,14 +69,13 @@ class DataUtils {
       await sp.setString(SP_USER_EMAIL, email);
       await sp.setString(SP_USER_URL, url);
       UserInfo userInfo = new UserInfo(
-        id: id,
-        name: name,
-        gender: gender,
-        avatar: avatar,
-        email: email,
-        location: location,
-        url: url
-      );
+          id: id,
+          name: name,
+          gender: gender,
+          avatar: avatar,
+          email: email,
+          location: location,
+          url: url);
       return userInfo;
     }
     return null;
@@ -123,5 +122,4 @@ class DataUtils {
     SharedPreferences sp = await SharedPreferences.getInstance();
     return sp.getInt(SP_COLOR_THEME_INDEX);
   }
-
 }
