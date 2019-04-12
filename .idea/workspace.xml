@@ -9,44 +9,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd2fdf53-d104-4eca-8fd5-439747eda92e" name="Default" comment="update libs">
-      <change afterPath="$PROJECT_DIR$/lib/test.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/api/Api.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/api/Api.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/constants/Constants.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/constants/Constants.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/events/ChangeThemeEvent.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/events/ChangeThemeEvent.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/AboutPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/AboutPage.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/BlackHousePage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/BlackHousePage.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/ChangeThemePage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/ChangeThemePage.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/CommonWebPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/CommonWebPage.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/DiscoveryPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/DiscoveryPage.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/LoginPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/LoginPage.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/MyInfoPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/MyInfoPage.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/NewLoginPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/NewLoginPage.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/NewsDetailPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/NewsDetailPage.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/NewsListPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/NewsListPage.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/OfflineActivityPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/OfflineActivityPage.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/PublishTweetPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/PublishTweetPage.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/SettingsPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/SettingsPage.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/TestPage.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/TweetDetailPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/TweetDetailPage.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/TweetsListPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/TweetsListPage.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/UserInfoDetailPage.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/util/BlackListUtils.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/util/BlackListUtils.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/util/DataUtils.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/util/DataUtils.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/util/NetUtils.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/util/NetUtils.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/util/ToastUtils.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/events/SlideEvent.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/util/Utf8Utils.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/util/Utf8Utils.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/CircleImage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/CircleImage.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/CommonButton.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/CommonButton.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/CommonEndLine.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/CommonEndLine.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/MyDrawer.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/MyDrawer.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/SlideView.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/SlideView.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/SlideViewIndicator.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/SlideViewIndicator.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
-    </list>
+    <list default="true" id="cd2fdf53-d104-4eca-8fd5-439747eda92e" name="Default" comment="update libs" />
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
     <ignored path="$PROJECT_DIR$/.pub/" />
@@ -87,13 +50,13 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="dart" value="3353" />
+          <entry key="dart" value="3448" />
           <entry key="java" value="44" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Dart" value="3353" />
+          <entry key="Dart" value="3448" />
           <entry key="JAVA" value="44" />
         </counts>
       </usages-collector>
@@ -104,8 +67,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/pages/NewsListPage.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="370">
-              <caret line="117" column="22" selection-start-line="117" selection-start-column="22" selection-end-line="117" selection-end-column="22" />
+            <state relative-caret-position="281">
+              <caret line="117" column="23" selection-start-line="117" selection-start-column="23" selection-end-line="117" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -113,17 +76,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/test.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="76">
-              <caret line="4" column="8" lean-forward="true" selection-start-line="4" selection-start-column="8" selection-end-line="4" selection-end-column="8" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/widgets/SlideViewIndicator.dart">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="141">
-              <caret line="14" column="24" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
+            <state relative-caret-position="38">
+              <caret line="2" column="50" lean-forward="true" selection-start-line="2" selection-start-column="50" selection-end-line="2" selection-end-column="50" />
             </state>
           </provider>
         </entry>
@@ -152,8 +106,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/widgets/SlideView.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="14">
-              <caret line="15" column="3" lean-forward="true" selection-start-line="15" selection-start-column="3" selection-end-line="15" selection-end-column="3" />
+            <state relative-caret-position="9">
+              <caret line="6" column="18" lean-forward="true" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="18" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -416,7 +370,7 @@
       <window_info id="Capture Tool" order="7" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32916668" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49427754" weight="0.21527778" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49427754" weight="0.5708333" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -424,9 +378,9 @@
       <window_info anchor="bottom" id="Dart Analysis" order="7" weight="0.43235704" />
       <window_info anchor="bottom" id="Android Profiler" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50572246" side_tool="true" weight="0.28278688" />
-      <window_info anchor="bottom" id="Logcat" order="10" weight="0.32914925" />
+      <window_info anchor="bottom" id="Logcat" order="10" weight="0.32777777" />
       <window_info anchor="bottom" id="Version Control" order="11" weight="0.32914925" />
-      <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.49427754" weight="0.34166667" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="12" sideWeight="0.49427754" visible="true" weight="0.34166667" />
       <window_info anchor="bottom" id="Messages" order="13" weight="0.32635984" />
       <window_info anchor="bottom" id="Flutter Performance" order="14" side_tool="true" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -756,13 +710,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/pages/NewsListPage.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="370">
-          <caret line="117" column="22" selection-start-line="117" selection-start-column="22" selection-end-line="117" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/flutter/packages/flutter/lib/src/widgets/framework.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="484">
@@ -770,24 +717,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/test.dart">
+    <entry file="file://$PROJECT_DIR$/lib/widgets/SlideViewIndicator.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="4" column="8" lean-forward="true" selection-start-line="4" selection-start-column="8" selection-end-line="4" selection-end-column="8" />
+        <state relative-caret-position="95">
+          <caret line="5" column="2" selection-start-line="5" selection-start-column="2" selection-end-line="5" selection-end-column="2" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/widgets/SlideViewIndicator.dart">
+    <entry file="file://$PROJECT_DIR$/lib/test.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
-          <caret line="14" column="24" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
+        <state relative-caret-position="38">
+          <caret line="2" column="50" lean-forward="true" selection-start-line="2" selection-start-column="50" selection-end-line="2" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/pages/NewsListPage.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="281">
+          <caret line="117" column="23" selection-start-line="117" selection-start-column="23" selection-end-line="117" selection-end-column="23" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/widgets/SlideView.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="14">
-          <caret line="15" column="3" lean-forward="true" selection-start-line="15" selection-start-column="3" selection-end-line="15" selection-end-column="3" />
+        <state relative-caret-position="9">
+          <caret line="6" column="18" lean-forward="true" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="18" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>
