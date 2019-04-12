@@ -31,6 +31,8 @@ class NewLoginPageState extends State<NewLoginPage> {
   bool isLoadingCallbackPage = false;
   // 是否正在登录
   bool isOnLogin = false;
+  // 是否隐藏输入的文本
+  bool obscureText = true;
 
   final usernameCtrl = TextEditingController(text: '');
   final passwordCtrl = TextEditingController(text: '');
@@ -94,6 +96,8 @@ class NewLoginPageState extends State<NewLoginPage> {
               // 不是输入账号密码的界面，则需要模拟点击"换个账号"按钮
               break;
           }
+          break;
+        case WebViewState.abortLoad:
           break;
       }
     });
@@ -246,7 +250,7 @@ class NewLoginPageState extends State<NewLoginPage> {
                 Text("密　码："),
                 Expanded(child: TextField(
                   controller: passwordCtrl,
-                  obscureText: true,
+                  obscureText: obscureText,
                   decoration: InputDecoration(
                     hintText: "登录密码",
                     hintStyle: TextStyle(
@@ -257,7 +261,20 @@ class NewLoginPageState extends State<NewLoginPage> {
                     ),
                     contentPadding: const EdgeInsets.all(10.0)
                   ),
-                ))
+                )),
+                InkWell(
+                  child: Container(
+                    width: 40,
+                    height: 40,
+                    alignment: Alignment.center,
+                    child: Image.asset("images/ic_eye.png", width: 20, height: 20),
+                  ),
+                  onTap: () {
+                    setState(() {
+                      obscureText = !obscureText;
+                    });
+                  },
+                )
               ],
             ),
             Container(height: 20.0),

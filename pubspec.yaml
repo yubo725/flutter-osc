@@ -77,6 +77,7 @@ flutter:
     - images/leftmenu/ic_settings.png
     - images/ic_osc_logo.png
     - images/ic_add_pics.png
+    - images/ic_eye.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.

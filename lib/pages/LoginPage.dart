@@ -51,6 +51,8 @@ class LoginPageState extends State<LoginPage> {
             parseResult();
           }
           break;
+        case WebViewState.abortLoad:
+          break;
       }
     });
     _onUrlChanged = flutterWebViewPlugin.onUrlChanged.listen((url) {
