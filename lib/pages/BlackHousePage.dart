@@ -14,14 +14,14 @@ import '../util/Utf8Utils.dart';
 class BlackHousePage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return new BlackHousePageState();
+    return BlackHousePageState();
   }
 }
 
 class BlackHousePageState extends State<BlackHousePage> {
   bool isLogin = true;
   List blackDataList;
-  TextStyle btnStyle = new TextStyle(color: Colors.white, fontSize: 12.0);
+  TextStyle btnStyle = TextStyle(color: Colors.white, fontSize: 12.0);
 
   BlackHousePageState() {
     queryBlackList();
@@ -30,7 +30,7 @@ class BlackHousePageState extends State<BlackHousePage> {
   queryBlackList() {
     DataUtils.getUserInfo().then((userInfo) {
       if (userInfo != null) {
-        String url = Api.QUERY_BLACK;
+        String url = Api.queryBlack;
         url += "/${userInfo.id}";
         NetUtils.get(url).then((data) {
           if (data != null) {
@@ -54,9 +54,9 @@ class BlackHousePageState extends State<BlackHousePage> {
   getUserInfo() async {
     SharedPreferences sp = await SharedPreferences.getInstance();
     String accessToken = sp.get(DataUtils.SP_AC_TOKEN);
-    Map<String, String> params = new Map();
+    Map<String, String> params = Map();
     params['access_token'] = accessToken;
-    NetUtils.get(Api.USER_INFO, params: params).then((data) {
+    NetUtils.get(Api.userInfo, params: params).then((data) {
       if (data != null) {
         var map = json.decode(data);
         DataUtils.saveUserInfo(map).then((userInfo) {
@@ -71,10 +71,10 @@ class BlackHousePageState extends State<BlackHousePage> {
     DataUtils.getUserInfo().then((userInfo) {
       if (userInfo != null) {
         String userId = "${userInfo.id}";
-        Map<String, String> params = new Map();
+        Map<String, String> params = Map();
         params['userid'] = userId;
         params['authorid'] = "$authorId";
-        NetUtils.get(Api.DELETE_BLACK, params: params).then((data) {
+        NetUtils.get(Api.deleteBlack, params: params).then((data) {
           Navigator.of(context).pop();
           if (data != null) {
             var obj = json.decode(data);
@@ -98,14 +98,14 @@ class BlackHousePageState extends State<BlackHousePage> {
     showDialog(
       context: context,
       builder: (ctx) {
-        return new AlertDialog(
-          title: new Text('提示'),
-          content: new Text(msg),
+        return AlertDialog(
+          title: Text('提示'),
+          content: Text(msg),
           actions: <Widget>[
-            new FlatButton(
-              child: new Text(
+            FlatButton(
+              child: Text(
                 '确定',
-                style: new TextStyle(color: Colors.red),
+                style: TextStyle(color: Colors.red),
               ),
               onPressed: () {
                 Navigator.of(context).pop();
@@ -122,14 +122,14 @@ class BlackHousePageState extends State<BlackHousePage> {
     showDialog(
       context: context,
       builder: (BuildContext ctx) {
-        return new AlertDialog(
-          title: new Text('提示'),
-          content: new Text('确定要把\"$name\"放出小黑屋吗？'),
+        return AlertDialog(
+          title: Text('提示'),
+          content: Text('确定要把\"$name\"放出小黑屋吗？'),
           actions: <Widget>[
-            new FlatButton(
-              child: new Text(
+            FlatButton(
+              child: Text(
                 '确定',
-                style: new TextStyle(color: Colors.red),
+                style: TextStyle(color: Colors.red),
               ),
               onPressed: () {
                 deleteFromBlack(item['authorid']);
@@ -142,23 +142,23 @@ class BlackHousePageState extends State<BlackHousePage> {
 
   Widget getBody() {
     if (!isLogin) {
-      return new Center(
-        child: new InkWell(
-          child: new Container(
+      return Center(
+        child: InkWell(
+          child: Container(
             padding: const EdgeInsets.fromLTRB(15.0, 8.0, 15.0, 8.0),
-            child: new Text("去登录"),
-            decoration: new BoxDecoration(
-                border: new Border.all(color: Colors.black),
-                borderRadius: new BorderRadius.all(new Radius.circular(5.0))
+            child: Text("去登录"),
+            decoration: BoxDecoration(
+                border: Border.all(color: Colors.black),
+                borderRadius: BorderRadius.all(Radius.circular(5.0))
             ),
           ),
           onTap: () async {
-            final result = await Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) {
+            final result = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
               return NewLoginPage();
             }));
             if (result != null && result == "refresh") {
               // 通知动弹页面刷新
-              Constants.eventBus.fire(new LoginEvent());
+              Constants.eventBus.fire(LoginEvent());
               getUserInfo();
             }
           },
@@ -166,62 +166,62 @@ class BlackHousePageState extends State<BlackHousePage> {
       );
     }
     if (blackDataList == null) {
-      return new Center(
-        child: new CircularProgressIndicator(),
+      return Center(
+        child: CircularProgressIndicator(),
       );
     } else if (blackDataList.length == 0) {
-      return new Center(
-        child: new Column(
+      return Center(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            new Text("小黑屋中没人..."),
-            new Text("长按动弹列表即可往小黑屋中加人")
+            Text("小黑屋中没人..."),
+            Text("长按动弹列表即可往小黑屋中加人")
           ],
         ),
       );
     }
-    return new GridView.count(
+    return GridView.count(
       crossAxisCount: 3,
-      children: new List.generate(blackDataList.length, (index) {
+      children: List.generate(blackDataList.length, (index) {
         String name = Utf8Utils.decode(blackDataList[index]['authorname']);
-        return new Container(
+        return Container(
           margin: const EdgeInsets.all(2.0),
           color: Colors.black,
-          child: new Column(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              new Container(
+              Container(
                 width: 45.0,
                 height: 45.0,
-                decoration: new BoxDecoration(
+                decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: Colors.transparent,
-                  image: new DecorationImage(
-                      image: new NetworkImage(
+                  image: DecorationImage(
+                      image: NetworkImage(
                           "${blackDataList[index]['authoravatar']}"),
                       fit: BoxFit.cover),
-                  border: new Border.all(
+                  border: Border.all(
                     color: Colors.white,
                     width: 2.0,
                   ),
                 ),
               ),
-              new Container(
+              Container(
                 margin: const EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 5.0),
                 child:
-                    new Text(name, style: new TextStyle(color: Colors.white)),
+                    Text(name, style: TextStyle(color: Colors.white)),
               ),
-              new InkWell(
-                child: new Container(
+              InkWell(
+                child: Container(
                   padding: const EdgeInsets.fromLTRB(8.0, 5.0, 5.0, 8.0),
-                  child: new Text(
+                  child: Text(
                     "放我出去",
                     style: btnStyle,
                   ),
-                  decoration: new BoxDecoration(
-                      border: new Border.all(color: Colors.white),
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.white),
                       borderRadius:
-                          new BorderRadius.all(new Radius.circular(5.0))),
+                          BorderRadius.all(Radius.circular(5.0))),
                 ),
                 onTap: () {
                   showSetFreeDialog(blackDataList[index]);
@@ -236,12 +236,12 @@ class BlackHousePageState extends State<BlackHousePage> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text("动弹小黑屋", style: new TextStyle(color: Colors.white)),
-        iconTheme: new IconThemeData(color: Colors.white),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("动弹小黑屋", style: TextStyle(color: Colors.white)),
+        iconTheme: IconThemeData(color: Colors.white),
       ),
-      body: new Padding(
+      body: Padding(
         padding: const EdgeInsets.fromLTRB(2.0, 4.0, 2.0, 0.0),
         child: getBody(),
       ),

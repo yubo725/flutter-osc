@@ -11,18 +11,18 @@ import 'pages/MyInfoPage.dart';
 import './widgets/MyDrawer.dart';
 
 void main() {
-  runApp(new MyOSCClient());
+  runApp(MyOSCClient());
 }
 
 class MyOSCClient extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => new MyOSCClientState();
+  State<StatefulWidget> createState() => MyOSCClientState();
 }
 
 class MyOSCClientState extends State<MyOSCClient> {
   final appBarTitles = ['资讯', '动弹', '发现', '我的'];
-  final tabTextStyleSelected = new TextStyle(color: const Color(0xff63ca6c));
-  final tabTextStyleNormal = new TextStyle(color: const Color(0xff969696));
+  final tabTextStyleSelected = TextStyle(color: const Color(0xff63ca6c));
+  final tabTextStyleNormal = TextStyle(color: const Color(0xff969696));
 
   Color themeColor = ThemeUtils.currentColorTheme;
   int _tabIndex = 0;
@@ -32,7 +32,7 @@ class MyOSCClientState extends State<MyOSCClient> {
   var pages;
 
   Image getTabImage(path) {
-    return new Image.asset(path, width: 20.0, height: 20.0);
+    return Image.asset(path, width: 20.0, height: 20.0);
   }
 
   @override
@@ -42,7 +42,7 @@ class MyOSCClientState extends State<MyOSCClient> {
       print('color theme index = $index');
       if (index != null) {
         ThemeUtils.currentColorTheme = ThemeUtils.supportColors[index];
-        Constants.eventBus.fire(new ChangeThemeEvent(ThemeUtils.supportColors[index]));
+        Constants.eventBus.fire(ChangeThemeEvent(ThemeUtils.supportColors[index]));
       }
     });
     Constants.eventBus.on<ChangeThemeEvent>().listen((event) {
@@ -50,12 +50,7 @@ class MyOSCClientState extends State<MyOSCClient> {
         themeColor = event.color;
       });
     });
-    pages = <Widget>[
-      new NewsListPage(),
-      new TweetsListPage(),
-      new DiscoveryPage(),
-      new MyInfoPage()
-    ];
+    pages = <Widget>[NewsListPage(), TweetsListPage(), DiscoveryPage(), MyInfoPage()];
     if (tabImages == null) {
       tabImages = [
         [
@@ -93,38 +88,38 @@ class MyOSCClientState extends State<MyOSCClient> {
   }
 
   Text getTabTitle(int curIndex) {
-    return new Text(appBarTitles[curIndex], style: getTabTextStyle(curIndex));
+    return Text(appBarTitles[curIndex], style: getTabTextStyle(curIndex));
   }
 
   @override
   Widget build(BuildContext context) {
-    _body = new IndexedStack(
+    _body = IndexedStack(
       children: pages,
       index: _tabIndex,
     );
-    return new MaterialApp(
-      theme: new ThemeData(
+    return MaterialApp(
+      theme: ThemeData(
           primaryColor: themeColor
       ),
-      home: new Scaffold(
-        appBar: new AppBar(
-          title: new Text(appBarTitles[_tabIndex],
-          style: new TextStyle(color: Colors.white)),
-          iconTheme: new IconThemeData(color: Colors.white)
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text(appBarTitles[_tabIndex],
+          style: TextStyle(color: Colors.white)),
+          iconTheme: IconThemeData(color: Colors.white)
         ),
         body: _body,
-        bottomNavigationBar: new CupertinoTabBar(
+        bottomNavigationBar: CupertinoTabBar(
           items: <BottomNavigationBarItem>[
-            new BottomNavigationBarItem(
+            BottomNavigationBarItem(
                 icon: getTabIcon(0),
                 title: getTabTitle(0)),
-            new BottomNavigationBarItem(
+            BottomNavigationBarItem(
                 icon: getTabIcon(1),
                 title: getTabTitle(1)),
-            new BottomNavigationBarItem(
+            BottomNavigationBarItem(
                 icon: getTabIcon(2),
                 title: getTabTitle(2)),
-            new BottomNavigationBarItem(
+            BottomNavigationBarItem(
                 icon: getTabIcon(3),
                 title: getTabTitle(3)),
           ],
@@ -135,7 +130,7 @@ class MyOSCClientState extends State<MyOSCClient> {
             });
           },
         ),
-        drawer: new MyDrawer()
+        drawer: MyDrawer()
       ),
     );
   }

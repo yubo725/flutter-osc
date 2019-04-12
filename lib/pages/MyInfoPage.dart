@@ -17,7 +17,7 @@ import '../model/UserInfo.dart';
 class MyInfoPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return new MyInfoPageState();
+    return MyInfoPageState();
   }
 }
 
@@ -40,8 +40,8 @@ class MyInfoPageState extends State<MyInfoPage> {
   var icons = [];
   var userAvatar;
   var userName;
-  var titleTextStyle = new TextStyle(fontSize: 16.0);
-  var rightArrowIcon = new Image.asset(
+  var titleTextStyle = TextStyle(fontSize: 16.0);
+  var rightArrowIcon = Image.asset(
     'images/ic_arrow_right.png',
     width: ARROW_ICON_WIDTH,
     height: ARROW_ICON_WIDTH,
@@ -91,16 +91,16 @@ class MyInfoPageState extends State<MyInfoPage> {
   }
 
   Widget getIconImage(path) {
-    return new Padding(
+    return Padding(
       padding: const EdgeInsets.fromLTRB(0.0, 0.0, 10.0, 0.0),
-      child: new Image.asset(path,
+      child: Image.asset(path,
           width: IMAGE_ICON_WIDTH, height: IMAGE_ICON_WIDTH),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    var listView = new ListView.builder(
+    var listView = ListView.builder(
       itemCount: titles.length * 2,
       itemBuilder: (context, i) => renderRow(i),
     );
@@ -111,9 +111,9 @@ class MyInfoPageState extends State<MyInfoPage> {
   getUserInfo() async {
     SharedPreferences sp = await SharedPreferences.getInstance();
     String accessToken = sp.get(DataUtils.SP_AC_TOKEN);
-    Map<String, String> params = new Map();
+    Map<String, String> params = Map();
     params['access_token'] = accessToken;
-    NetUtils.get(Api.USER_INFO, params: params).then((data) {
+    NetUtils.get(Api.userInfo, params: params).then((data) {
       if (data != null) {
         var map = json.decode(data);
         setState(() {
@@ -129,15 +129,15 @@ class MyInfoPageState extends State<MyInfoPage> {
     // 打开登录页并处理登录成功的回调
     final result = await Navigator
         .of(context)
-        .push(new MaterialPageRoute(builder: (context) {
-      return new NewLoginPage();
+        .push(MaterialPageRoute(builder: (context) {
+      return NewLoginPage();
     }));
     // result为"refresh"代表登录成功
     if (result != null && result == "refresh") {
       // 刷新用户信息
       getUserInfo();
       // 通知动弹页面刷新
-      Constants.eventBus.fire(new LoginEvent());
+      Constants.eventBus.fire(LoginEvent());
     }
   }
 
@@ -145,42 +145,42 @@ class MyInfoPageState extends State<MyInfoPage> {
 
   renderRow(i) {
     if (i == 0) {
-      var avatarContainer = new Container(
+      var avatarContainer = Container(
         color: themeColor,
         height: 200.0,
-        child: new Center(
-          child: new Column(
+        child: Center(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               userAvatar == null
-                  ? new Image.asset(
+                  ? Image.asset(
                       "images/ic_avatar_default.png",
                       width: 60.0,
                     )
-                  : new Container(
+                  : Container(
                       width: 60.0,
                       height: 60.0,
-                      decoration: new BoxDecoration(
+                      decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: Colors.transparent,
-                        image: new DecorationImage(
-                            image: new NetworkImage(userAvatar),
+                        image: DecorationImage(
+                            image: NetworkImage(userAvatar),
                             fit: BoxFit.cover),
-                        border: new Border.all(
+                        border: Border.all(
                           color: Colors.white,
                           width: 2.0,
                         ),
                       ),
                     ),
-              new Text(
+              Text(
                 userName == null ? "点击头像登录" : userName,
-                style: new TextStyle(color: Colors.white, fontSize: 16.0),
+                style: TextStyle(color: Colors.white, fontSize: 16.0),
               ),
             ],
           ),
         ),
       );
-      return new GestureDetector(
+      return GestureDetector(
         onTap: () {
           DataUtils.isLogin().then((isLogin) {
             if (isLogin) {
@@ -197,19 +197,19 @@ class MyInfoPageState extends State<MyInfoPage> {
     }
     --i;
     if (i.isOdd) {
-      return new Divider(
+      return Divider(
         height: 1.0,
       );
     }
     i = i ~/ 2;
     String title = titles[i];
-    var listItemContent = new Padding(
+    var listItemContent = Padding(
       padding: const EdgeInsets.fromLTRB(10.0, 15.0, 10.0, 15.0),
-      child: new Row(
+      child: Row(
         children: <Widget>[
           icons[i],
-          new Expanded(
-              child: new Text(
+          Expanded(
+              child: Text(
             title,
             style: titleTextStyle,
           )),
@@ -217,13 +217,13 @@ class MyInfoPageState extends State<MyInfoPage> {
         ],
       ),
     );
-    return new InkWell(
+    return InkWell(
       child: listItemContent,
       onTap: () {
         _handleListItemClick(title);
 //        Navigator
 //            .of(context)
-//            .push(new MaterialPageRoute(builder: (context) => new CommonWebPage(title: "Test", url: "https://my.oschina.net/u/815261/blog")));
+//            .push(MaterialPageRoute(builder: (context) => CommonWebPage(title: "Test", url: "https://my.oschina.net/u/815261/blog")));
       },
     );
   }
@@ -232,23 +232,23 @@ class MyInfoPageState extends State<MyInfoPage> {
     showDialog(
         context: context,
         builder: (BuildContext ctx) {
-          return new AlertDialog(
-            title: new Text('提示'),
-            content: new Text('没有登录，现在去登录吗？'),
+          return AlertDialog(
+            title: Text('提示'),
+            content: Text('没有登录，现在去登录吗？'),
             actions: <Widget>[
-              new FlatButton(
-                child: new Text(
+              FlatButton(
+                child: Text(
                   '取消',
-                  style: new TextStyle(color: Colors.red),
+                  style: TextStyle(color: Colors.red),
                 ),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
               ),
-              new FlatButton(
-                child: new Text(
+              FlatButton(
+                child: Text(
                   '确定',
-                  style: new TextStyle(color: Colors.blue),
+                  style: TextStyle(color: Colors.blue),
                 ),
                 onPressed: () {
                   Navigator.of(context).pop();
@@ -268,8 +268,8 @@ class MyInfoPageState extends State<MyInfoPage> {
       } else {
         DataUtils.getUserInfo().then((info) {
           Navigator.of(context).push(
-            new MaterialPageRoute(
-              builder: (context) => new CommonWebPage(
+            MaterialPageRoute(
+              builder: (context) => CommonWebPage(
                 title: "我的博客",
                 url: "https://my.oschina.net/u/${info.id}/blog"
               )

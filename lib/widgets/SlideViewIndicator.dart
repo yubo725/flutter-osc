@@ -1,29 +1,22 @@
 import 'package:flutter/material.dart';
 
 class SlideViewIndicator extends StatefulWidget {
-  int count;
-  int selectedIndex = 0;
-  SlideViewIndicatorState state;
+  final int count;
 
-  SlideViewIndicator(count) {
-    this.count = count;
-    this.state = new SlideViewIndicatorState();
-  }
+  SlideViewIndicator(this.count, { Key key }) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() {
-    this.state = new SlideViewIndicatorState();
-    return this.state;
-  }
+  State<StatefulWidget> createState() => SlideViewIndicatorState();
 }
 
 class SlideViewIndicatorState extends State<SlideViewIndicator> {
 
   final double dotWidth = 8.0;
+  int selectedIndex = 0;
 
   setSelectedIndex(int index) {
     setState(() {
-      this.widget.selectedIndex = index;
+      this.selectedIndex = index;
     });
   }
 
@@ -31,36 +24,36 @@ class SlideViewIndicatorState extends State<SlideViewIndicator> {
   Widget build(BuildContext context) {
     List<Widget> dots = [];
     for (int i = 0; i < this.widget.count; i++) {
-      if (i == this.widget.selectedIndex) {
+      if (i == this.selectedIndex) {
         // 选中的dot
-        dots.add(new Container(
+        dots.add(Container(
           width: dotWidth,
           height: dotWidth,
-          decoration: new BoxDecoration(
+          decoration: BoxDecoration(
             color: const Color(0xffffffff),
             shape: BoxShape.circle
           ),
-          margin: const EdgeInsets.all(8.0),
+          margin: const EdgeInsets.all(3.0),
         ));
       } else {
         // 未选中的dot
-        dots.add(new Container(
+        dots.add(Container(
           width: dotWidth,
           height: dotWidth,
-          decoration: new BoxDecoration(
+          decoration: BoxDecoration(
             color: const Color(0xff888888),
             shape: BoxShape.circle
           ),
-          margin: const EdgeInsets.all(8.0),
+          margin: const EdgeInsets.all(3.0),
         ));
       }
     }
-    return new Container(
+    return Container(
       height: 30.0,
       color: const Color(0x00000000),
       margin: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 5.0),
-      child: new Center(
-        child: new Row(
+      child: Center(
+        child: Row(
           children: dots,
           mainAxisAlignment: MainAxisAlignment.center,
         )

@@ -16,7 +16,7 @@ import '../util/DataUtils.dart';
 class TweetsListPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return new TweetsListPageState();
+    return TweetsListPageState();
   }
 }
 
@@ -25,8 +25,8 @@ class TweetsListPageState extends State<TweetsListPage> {
   List normalTweetsList;
   TextStyle authorTextStyle;
   TextStyle subtitleStyle;
-  RegExp regExp1 = new RegExp("</.*>");
-  RegExp regExp2 = new RegExp("<.*>");
+  RegExp regExp1 = RegExp("</.*>");
+  RegExp regExp2 = RegExp("<.*>");
   num curPage = 1;
   bool loading = false;
   ScrollController _controller;
@@ -54,10 +54,10 @@ class TweetsListPageState extends State<TweetsListPage> {
 
   TweetsListPageState() {
     authorTextStyle =
-        new TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold);
+        TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold);
     subtitleStyle =
-        new TextStyle(fontSize: 12.0, color: const Color(0xFFB5BDC0));
-    _controller = new ScrollController();
+        TextStyle(fontSize: 12.0, color: const Color(0xFFB5BDC0));
+    _controller = ScrollController();
     _controller.addListener(() {
       var maxScroll = _controller.position.maxScrollExtent;
       var pixels = _controller.position.pixels;
@@ -77,7 +77,7 @@ class TweetsListPageState extends State<TweetsListPage> {
             return;
           }
           loading = true;
-          Map<String, String> params = new Map();
+          Map<String, String> params = Map();
           params['access_token'] = token;
           params['page'] = "$curPage";
           if (isHot) {
@@ -87,7 +87,7 @@ class TweetsListPageState extends State<TweetsListPage> {
           }
           params['pageSize'] = "20";
           params['dataType'] = "json";
-          NetUtils.get(Api.TWEETS_LIST, params: params).then((data) {
+          NetUtils.get(Api.tweetsList, params: params).then((data) {
             Map<String, dynamic> obj = json.decode(data);
             if (!isLoadMore) {
               // first load
@@ -98,7 +98,7 @@ class TweetsListPageState extends State<TweetsListPage> {
               }
             } else {
               // load more
-              List list = new List();
+              List list = List();
               list.addAll(normalTweetsList);
               list.addAll(obj['tweetlist']);
               normalTweetsList = list;
@@ -115,7 +115,7 @@ class TweetsListPageState extends State<TweetsListPage> {
   filterList(List<dynamic> objList, bool isHot) {
     BlackListUtils.getBlackListIds().then((intList) {
       if (intList != null && intList.isNotEmpty && objList != null) {
-        List newList = new List();
+        List newList = List();
         for (dynamic item in objList) {
           int authorId = item['authorid'];
           if (!intList.contains(authorId)) {
@@ -156,39 +156,39 @@ class TweetsListPageState extends State<TweetsListPage> {
   }
 
   Widget getRowWidget(Map<String, dynamic> listItem) {
-    var authorRow = new Row(
+    var authorRow = Row(
       children: <Widget>[
-        new Container(
+        Container(
           width: 35.0,
           height: 35.0,
-          decoration: new BoxDecoration(
+          decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: Colors.transparent,
-            image: new DecorationImage(
-                image: new NetworkImage(listItem['portrait']),
+            image: DecorationImage(
+                image: NetworkImage(listItem['portrait']),
                 fit: BoxFit.cover),
-            border: new Border.all(
+            border: Border.all(
               color: Colors.white,
               width: 2.0,
             ),
           ),
         ),
-        new Padding(
+        Padding(
           padding: const EdgeInsets.fromLTRB(6.0, 0.0, 0.0, 0.0),
-          child: new Text(
+          child: Text(
             listItem['author'],
-            style: new TextStyle(fontSize: 16.0)
+            style: TextStyle(fontSize: 16.0)
           )
         ),
-        new Expanded(
-          child: new Row(
+        Expanded(
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
-              new Text(
+              Text(
                 '${listItem['commentCount']}',
                 style: subtitleStyle,
               ),
-              new Image.asset(
+              Image.asset(
                 './images/ic_comment.png',
                 width: 16.0,
                 height: 16.0,
@@ -200,26 +200,26 @@ class TweetsListPageState extends State<TweetsListPage> {
     );
     var _body = listItem['body'];
     _body = clearHtmlContent(_body);
-    var contentRow = new Row(
+    var contentRow = Row(
       children: <Widget>[
-        new Expanded(child: new Text(_body))
+        Expanded(child: Text(_body))
       ],
     );
-    var timeRow = new Row(
+    var timeRow = Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: <Widget>[
-        new Text(
+        Text(
           listItem['pubDate'],
           style: subtitleStyle,
         )
       ],
     );
     var columns = <Widget>[
-      new Padding(
+      Padding(
         padding: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 2.0),
         child: authorRow,
       ),
-      new Padding(
+      Padding(
         padding: const EdgeInsets.fromLTRB(52.0, 0.0, 10.0, 0.0),
         child: contentRow,
       ),
@@ -228,7 +228,7 @@ class TweetsListPageState extends State<TweetsListPage> {
     if (imgSmall != null && imgSmall.length > 0) {
       // 动弹中有图片
       List<String> list = imgSmall.split(",");
-      List<String> imgUrlList = new List<String>();
+      List<String> imgUrlList = List<String>();
       for (String s in list) {
         if (s.startsWith("http")) {
           imgUrlList.add(s);
@@ -246,9 +246,9 @@ class TweetsListPageState extends State<TweetsListPage> {
           num screenWidth = MediaQuery.of(context).size.width;
           double cellWidth = (screenWidth - 100) / 3;
           if (index < len) {
-            rowArr.add(new Padding(
+            rowArr.add(Padding(
               padding: const EdgeInsets.all(2.0),
-              child: new Image.network(imgUrlList[index],
+              child: Image.network(imgUrlList[index],
                   width: cellWidth, height: cellWidth),
             ));
           }
@@ -256,29 +256,29 @@ class TweetsListPageState extends State<TweetsListPage> {
         rows.add(rowArr);
       }
       for (var row in rows) {
-        imgList.add(new Row(
+        imgList.add(Row(
           children: row,
         ));
       }
-      columns.add(new Padding(
+      columns.add(Padding(
         padding: const EdgeInsets.fromLTRB(52.0, 5.0, 10.0, 0.0),
-        child: new Column(
+        child: Column(
           children: imgList,
         ),
       ));
     }
-    columns.add(new Padding(
+    columns.add(Padding(
       padding: const EdgeInsets.fromLTRB(0.0, 10.0, 10.0, 6.0),
       child: timeRow,
     ));
-    return new InkWell(
-      child: new Column(
+    return InkWell(
+      child: Column(
         children: columns,
       ),
       onTap: () {
         // 跳转到动弹详情
-        Navigator.of(context).push(new MaterialPageRoute(builder: (ctx) {
-          return new TweetDetailPage(
+        Navigator.of(context).push(MaterialPageRoute(builder: (ctx) {
+          return TweetDetailPage(
             tweetData: listItem,
           );
         }));
@@ -287,23 +287,23 @@ class TweetsListPageState extends State<TweetsListPage> {
         showDialog(
           context: context,
           builder: (BuildContext ctx) {
-            return new AlertDialog(
-              title: new Text('提示'),
-              content: new Text('要把\"${listItem['author']}\"关进小黑屋吗？'),
+            return AlertDialog(
+              title: Text('提示'),
+              content: Text('要把\"${listItem['author']}\"关进小黑屋吗？'),
               actions: <Widget>[
-                new FlatButton(
-                  child: new Text(
+                FlatButton(
+                  child: Text(
                     '取消',
-                    style: new TextStyle(color: Colors.red),
+                    style: TextStyle(color: Colors.red),
                   ),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
                 ),
-                new FlatButton(
-                  child: new Text(
+                FlatButton(
+                  child: Text(
                     '确定',
-                    style: new TextStyle(color: Colors.blue),
+                    style: TextStyle(color: Colors.blue),
                   ),
                   onPressed: () {
                     putIntoBlackHouse(listItem);
@@ -324,12 +324,12 @@ class TweetsListPageState extends State<TweetsListPage> {
     DataUtils.getUserInfo().then((info) {
       if (info != null) {
         int loginUserId = info.id;
-        Map<String, String> params = new Map();
+        Map<String, String> params = Map();
         params['userid'] = '$loginUserId';
         params['authorid'] = '$authorId';
         params['authoravatar'] = portrait;
         params['authorname'] = Utf8Utils.encode(nickname);
-        NetUtils.post(Api.ADD_TO_BLACK, params: params).then((data) {
+        NetUtils.post(Api.addToBlack, params: params).then((data) {
           Navigator.of(context).pop();
           if (data != null) {
             var obj = json.decode(data);
@@ -359,14 +359,14 @@ class TweetsListPageState extends State<TweetsListPage> {
     showDialog(
       context: context,
       builder: (BuildContext ctx) {
-        return new AlertDialog(
-          title: new Text('提示'),
-          content: new Text(msg),
+        return AlertDialog(
+          title: Text('提示'),
+          content: Text(msg),
           actions: <Widget>[
-            new FlatButton(
-              child: new Text(
+            FlatButton(
+              child: Text(
                 '确定',
-                style: new TextStyle(color: Colors.red),
+                style: TextStyle(color: Colors.red),
               ),
               onPressed: () {
                 Navigator.of(context).pop();
@@ -379,7 +379,7 @@ class TweetsListPageState extends State<TweetsListPage> {
 
   renderHotRow(i) {
     if (i.isOdd) {
-      return new Divider(
+      return Divider(
         height: 1.0,
       );
     } else {
@@ -390,7 +390,7 @@ class TweetsListPageState extends State<TweetsListPage> {
 
   renderNormalRow(i) {
     if (i.isOdd) {
-      return new Divider(
+      return Divider(
         height: 1.0,
       );
     } else {
@@ -417,12 +417,12 @@ class TweetsListPageState extends State<TweetsListPage> {
   Widget getHotListView() {
     if (hotTweetsList == null) {
       getTweetsList(false, true);
-      return new Center(
-        child: new CircularProgressIndicator(),
+      return Center(
+        child: CircularProgressIndicator(),
       );
     } else {
       // 热门动弹列表
-      return new ListView.builder(
+      return ListView.builder(
         itemCount: hotTweetsList.length * 2 - 1,
         itemBuilder: (context, i) => renderHotRow(i),
       );
@@ -432,13 +432,13 @@ class TweetsListPageState extends State<TweetsListPage> {
   Widget getNormalListView() {
     if (normalTweetsList == null) {
       getTweetsList(false, false);
-      return new Center(
-        child: new CircularProgressIndicator(),
+      return Center(
+        child: CircularProgressIndicator(),
       );
     } else {
       // 普通动弹列表
-      return new RefreshIndicator(
-        child: new ListView.builder(
+      return RefreshIndicator(
+        child: ListView.builder(
           itemCount: normalTweetsList.length * 2 - 1,
           itemBuilder: (context, i) => renderNormalRow(i),
           physics: const AlwaysScrollableScrollPhysics(),
@@ -451,37 +451,37 @@ class TweetsListPageState extends State<TweetsListPage> {
   @override
   Widget build(BuildContext context) {
     if (!isUserLogin) {
-      return new Center(
-        child: new Column(
+      return Center(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            new Container(
+            Container(
               padding: const EdgeInsets.all(10.0),
-              child: new Center(
-                child: new Column(
+              child: Center(
+                child: Column(
                   children: <Widget>[
-                    new Text("由于OSC的openapi限制"),
-                    new Text("必须登录后才能获取动弹信息")
+                    Text("由于OSC的openapi限制"),
+                    Text("必须登录后才能获取动弹信息")
                   ],
                 ),
               )
             ),
-            new InkWell(
-              child: new Container(
+            InkWell(
+              child: Container(
                 padding: const EdgeInsets.fromLTRB(15.0, 8.0, 15.0, 8.0),
-                child: new Text("去登录"),
-                decoration: new BoxDecoration(
-                  border: new Border.all(color: Colors.black),
-                  borderRadius: new BorderRadius.all(new Radius.circular(5.0))
+                child: Text("去登录"),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black),
+                  borderRadius: BorderRadius.all(Radius.circular(5.0))
                 ),
               ),
               onTap: () async {
-                final result = await Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) {
+                final result = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
                   return NewLoginPage();
                 }));
                 if (result != null && result == "refresh") {
                   // 通知动弹页面刷新
-                  Constants.eventBus.fire(new LoginEvent());
+                  Constants.eventBus.fire(LoginEvent());
                 }
               },
             ),
@@ -489,17 +489,17 @@ class TweetsListPageState extends State<TweetsListPage> {
         ),
       );
     }
-    return new DefaultTabController(
+    return DefaultTabController(
       length: 2,
-      child: new Scaffold(
-        appBar: new TabBar(
+      child: Scaffold(
+        appBar: TabBar(
           labelColor: Colors.black,
           tabs: <Widget>[
-            new Tab(text: "动弹列表"),
-            new Tab(text: "热门动弹")
+            Tab(text: "动弹列表"),
+            Tab(text: "热门动弹")
           ],
         ),
-        body: new TabBarView(
+        body: TabBarView(
           children: <Widget>[getNormalListView(), getHotListView()],
         )),
     );

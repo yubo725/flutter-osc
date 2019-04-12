@@ -9,13 +9,13 @@ import '../util/DataUtils.dart';
 // 动弹详情
 
 class TweetDetailPage extends StatefulWidget {
-  Map<String, dynamic> tweetData;
+  final Map<String, dynamic> tweetData;
 
   TweetDetailPage({Key key, this.tweetData}):super(key: key);
 
   @override
   State<StatefulWidget> createState() {
-    return new TweetDetailPageState(tweetData: tweetData);
+    return TweetDetailPageState(tweetData: tweetData);
   }
 }
 
@@ -23,19 +23,19 @@ class TweetDetailPageState extends State<TweetDetailPage> {
 
   Map<String, dynamic> tweetData;
   List commentList;
-  RegExp regExp1 = new RegExp("</.*>");
-  RegExp regExp2 = new RegExp("<.*>");
-  TextStyle subtitleStyle = new TextStyle(
+  RegExp regExp1 = RegExp("</.*>");
+  RegExp regExp2 = RegExp("<.*>");
+  TextStyle subtitleStyle = TextStyle(
       fontSize: 12.0,
       color: const Color(0xFFB5BDC0)
   );
-  TextStyle contentStyle = new TextStyle(
+  TextStyle contentStyle = TextStyle(
       fontSize: 15.0,
       color: Colors.black
   );
   num curPage = 1;
-  ScrollController _controller = new ScrollController();
-  TextEditingController _inputController = new TextEditingController();
+  ScrollController _controller = ScrollController();
+  TextEditingController _inputController = TextEditingController();
 
   TweetDetailPageState({Key key, this.tweetData});
 
@@ -47,7 +47,7 @@ class TweetDetailPageState extends State<TweetDetailPage> {
           if (token == null || token.length == 0) {
             return;
           }
-          Map<String, String> params = new Map();
+          Map<String, String> params = Map();
           var id = this.tweetData['id'];
           params['id'] = '$id';
           params['catalog'] = '3';// 3是动弹评论
@@ -55,20 +55,20 @@ class TweetDetailPageState extends State<TweetDetailPage> {
           params['page'] = '$curPage';
           params['pageSize'] = '20';
           params['dataType'] = 'json';
-          NetUtils.get(Api.COMMENT_LIST, params: params).then((data) {
+          NetUtils.get(Api.commentList, params: params).then((data) {
             setState(() {
               if (!isLoadMore) {
                 commentList = json.decode(data)['commentList'];
                 if (commentList == null) {
-                  commentList = new List();
+                  commentList = List();
                 }
               } else {
                 // 加载更多数据
-                List list = new List();
+                List list = List();
                 list.addAll(commentList);
                 list.addAll(json.decode(data)['commentList']);
                 if (list.length >= tweetData['commentCount']) {
-                  list.add(Constants.END_LINE_TAG);
+                  list.add(Constants.endLineTag);
                 }
                 commentList = list;
               }
@@ -96,20 +96,20 @@ class TweetDetailPageState extends State<TweetDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    var _body = commentList == null ? new Center(
-      child: new CircularProgressIndicator(),
-    ) : new ListView.builder(
+    var _body = commentList == null ? Center(
+      child: CircularProgressIndicator(),
+    ) : ListView.builder(
       itemCount: commentList.length == 0 ? 1 : commentList.length * 2,
       itemBuilder: renderListItem,
       controller: _controller,
     );
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text("动弹详情", style: new TextStyle(color: Colors.white)),
-        iconTheme: new IconThemeData(color: Colors.white),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("动弹详情", style: TextStyle(color: Colors.white)),
+        iconTheme: IconThemeData(color: Colors.white),
         actions: <Widget>[
-          new IconButton(
-            icon: new Icon(Icons.send),
+          IconButton(
+            icon: Icon(Icons.send),
             onPressed: () {
               // 回复楼主
               showReplyBottomView(context, true);
@@ -127,7 +127,7 @@ class TweetDetailPageState extends State<TweetDetailPage> {
     }
     i -= 1;
     if (i.isOdd) {
-      return new Divider(height: 1.0,);
+      return Divider(height: 1.0,);
     }
     i ~/= 2;
     return _renderCommentRow(context, i);
@@ -136,42 +136,42 @@ class TweetDetailPageState extends State<TweetDetailPage> {
   // 渲染评论列表
   _renderCommentRow(context, i) {
     var listItem = commentList[i];
-    if (listItem is String && listItem == Constants.END_LINE_TAG) {
-      return new CommonEndLine();
+    if (listItem is String && listItem == Constants.endLineTag) {
+      return CommonEndLine();
     }
     String avatar = listItem['commentPortrait'];
     String author = listItem['commentAuthor'];
     String date = listItem['pubDate'];
     String content = listItem['content'];
     content = clearHtmlContent(content);
-    var row = new Row(
+    var row = Row(
       children: <Widget>[
-        new Padding(
+        Padding(
           padding: const EdgeInsets.all(10.0),
-          child: new Image.network(avatar, width: 35.0, height: 35.0,)
+          child: Image.network(avatar, width: 35.0, height: 35.0,)
         ),
-        new Expanded(
-          child: new Container(
+        Expanded(
+          child: Container(
             margin: const EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 5.0),
-            child: new Column(
+            child: Column(
               children: <Widget>[
-                new Row(
+                Row(
                   children: <Widget>[
-                    new Expanded(
-                      child: new Text(author, style: new TextStyle(color: const Color(0xFF63CA6C)),),
+                    Expanded(
+                      child: Text(author, style: TextStyle(color: const Color(0xFF63CA6C)),),
                     ),
-                    new Padding(
+                    Padding(
                         padding: const EdgeInsets.fromLTRB(0.0, 0.0, 10.0, 0.0),
-                        child: new Text(date, style: subtitleStyle,)
+                        child: Text(date, style: subtitleStyle,)
                     )
                   ],
                 ),
-                new Padding(
+                Padding(
                     padding: const EdgeInsets.fromLTRB(0.0, 0.0, 10.0, 0.0),
-                    child: new Row(
+                    child: Row(
                       children: <Widget>[
-                        new Expanded(
-                            child: new Text(content, style: contentStyle,)
+                        Expanded(
+                            child: Text(content, style: contentStyle,)
                         )
                       ],
                     )
@@ -182,9 +182,9 @@ class TweetDetailPageState extends State<TweetDetailPage> {
         )
       ],
     );
-    return new Builder(
+    return Builder(
       builder: (ctx) {
-        return new InkWell(
+        return InkWell(
           onTap: () {
             showReplyBottomView(ctx, false, data: listItem);
           },
@@ -208,26 +208,26 @@ class TweetDetailPageState extends State<TweetDetailPage> {
     showModalBottomSheet(
       context: ctx,
       builder: (sheetCtx) {
-        return new Container(
+        return Container(
           height: 230.0,
           padding: const EdgeInsets.all(20.0),
-          child: new Column(
+          child: Column(
             children: <Widget>[
-              new Row(
+              Row(
                 children: <Widget>[
-                  new Text(isMainFloor ? "回复楼主" : "回复"),
-                  new Expanded(child: new Text(title, style: new TextStyle(color: const Color(0xFF63CA6C)),)),
-                  new InkWell(
-                    child: new Container(
+                  Text(isMainFloor ? "回复楼主" : "回复"),
+                  Expanded(child: Text(title, style: TextStyle(color: const Color(0xFF63CA6C)),)),
+                  InkWell(
+                    child: Container(
                       padding: const EdgeInsets.fromLTRB(10.0, 6.0, 10.0, 6.0),
-                      decoration: new BoxDecoration(
-                        border: new Border.all(
+                      decoration: BoxDecoration(
+                        border: Border.all(
                           color: const Color(0xFF63CA6C),
                           width: 1.0,
                         ),
-                        borderRadius: new BorderRadius.all(new Radius.circular(6.0))
+                        borderRadius: BorderRadius.all(Radius.circular(6.0))
                       ),
-                      child: new Text("发送", style: new TextStyle(color: const Color(0xFF63CA6C)),),
+                      child: Text("发送", style: TextStyle(color: const Color(0xFF63CA6C)),),
                     ),
                     onTap: () {
                       // 发送回复
@@ -236,18 +236,18 @@ class TweetDetailPageState extends State<TweetDetailPage> {
                   )
                 ],
               ),
-              new Container(
+              Container(
                 height: 10.0,
               ),
-              new TextField(
+              TextField(
                 maxLines: 5,
                 controller: _inputController,
-                decoration: new InputDecoration(
+                decoration: InputDecoration(
                   hintText: "说点啥～",
-                  hintStyle: new TextStyle(
+                  hintStyle: TextStyle(
                       color: const Color(0xFF808080)
                   ),
-                  border: new OutlineInputBorder(
+                  border: OutlineInputBorder(
                     borderRadius: const BorderRadius.all(const Radius.circular(10.0)),
                   )
                 ),
@@ -267,7 +267,7 @@ class TweetDetailPageState extends State<TweetDetailPage> {
       DataUtils.isLogin().then((isLogin) {
         if (isLogin) {
           DataUtils.getAccessToken().then((token) {
-            Map<String, String> params = new Map();
+            Map<String, String> params = Map();
             params['access_token'] = token;
             params['id'] = "${tweetData['id']}";
             print("id: ${tweetData['id']}");
@@ -277,7 +277,7 @@ class TweetDetailPageState extends State<TweetDetailPage> {
             print("authorId: $authorId");
             params['isPostToMyZone'] = "0";
             params['dataType'] = "json";
-            NetUtils.get(Api.COMMENT_REPLY, params: params).then((data) {
+            NetUtils.get(Api.commentReply, params: params).then((data) {
               if (data != null) {
                 var obj = json.decode(data);
                 var error = obj['error'];
@@ -295,36 +295,36 @@ class TweetDetailPageState extends State<TweetDetailPage> {
   }
 
   Widget getTweetView(Map<String, dynamic> listItem) {
-    var authorRow = new Row(
+    var authorRow = Row(
       children: <Widget>[
-        new Container(
+        Container(
           width: 35.0,
           height: 35.0,
-          decoration: new BoxDecoration(
+          decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: Colors.blue,
-            image: new DecorationImage(
-                image: new NetworkImage(listItem['portrait']),
+            image: DecorationImage(
+                image: NetworkImage(listItem['portrait']),
                 fit: BoxFit.cover
             ),
-            border: new Border.all(
+            border: Border.all(
               color: Colors.white,
               width: 2.0,
             ),
           ),
         ),
-        new Padding(
+        Padding(
             padding: const EdgeInsets.fromLTRB(6.0, 0.0, 0.0, 0.0),
-            child: new Text(listItem['author'], style: new TextStyle(
+            child: Text(listItem['author'], style: TextStyle(
               fontSize: 16.0,
             ))
         ),
-        new Expanded(
-          child: new Row(
+        Expanded(
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
-              new Text('${listItem['commentCount']}', style: subtitleStyle,),
-              new Image.asset('./images/ic_comment.png', width: 20.0, height: 20.0,)
+              Text('${listItem['commentCount']}', style: subtitleStyle,),
+              Image.asset('./images/ic_comment.png', width: 20.0, height: 20.0,)
             ],
           ),
         )
@@ -332,23 +332,23 @@ class TweetDetailPageState extends State<TweetDetailPage> {
     );
     var _body = listItem['body'];
     _body = clearHtmlContent(_body);
-    var contentRow = new Row(
+    var contentRow = Row(
       children: <Widget>[
-        new Expanded(child: new Text(_body),)
+        Expanded(child: Text(_body),)
       ],
     );
-    var timeRow = new Row(
+    var timeRow = Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
-        new Text(listItem['pubDate'], style: subtitleStyle,)
+        Text(listItem['pubDate'], style: subtitleStyle,)
       ],
     );
     var columns = <Widget>[
-      new Padding(
+      Padding(
         padding: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 2.0),
         child: authorRow,
       ),
-      new Padding(
+      Padding(
         padding: const EdgeInsets.fromLTRB(52.0, 0.0, 10.0, 0.0),
         child: contentRow,
       ),
@@ -357,7 +357,7 @@ class TweetDetailPageState extends State<TweetDetailPage> {
     if (imgSmall != null && imgSmall.length > 0) {
       // 动弹中有图片
       List<String> list = imgSmall.split(",");
-      List<String> imgUrlList = new List<String>();
+      List<String> imgUrlList = List<String>();
       for (String s in list) {
         if (s.startsWith("http")) {
           imgUrlList.add(s);
@@ -375,52 +375,52 @@ class TweetDetailPageState extends State<TweetDetailPage> {
           num screenWidth = MediaQuery.of(context).size.width;
           double cellWidth = (screenWidth - 100) / 3;
           if (index < len) {
-            rowArr.add(new Padding(
+            rowArr.add(Padding(
               padding: const EdgeInsets.all(2.0),
-              child: new Image.network(imgUrlList[index], width: cellWidth, height: cellWidth),
+              child: Image.network(imgUrlList[index], width: cellWidth, height: cellWidth),
             ));
           }
         }
         rows.add(rowArr);
       }
       for (var row in rows) {
-        imgList.add(new Row(
+        imgList.add(Row(
           children: row,
         ));
       }
-      columns.add(new Padding(
+      columns.add(Padding(
         padding: const EdgeInsets.fromLTRB(52.0, 5.0, 10.0, 0.0),
-        child: new Column(
+        child: Column(
           children: imgList,
         ),
       ));
     }
-    columns.add(new Padding(
+    columns.add(Padding(
       padding: const EdgeInsets.fromLTRB(52.0, 10.0, 10.0, 6.0),
       child: timeRow,
     ));
-    columns.add(new Divider(height: 5.0,));
-    columns.add(new Container(
+    columns.add(Divider(height: 5.0,));
+    columns.add(Container(
       margin: const EdgeInsets.fromLTRB(0.0, 6.0, 0.0, 0.0),
-      child: new Row(
+      child: Row(
         children: <Widget>[
-          new Container(
+          Container(
             width: 4.0,
             height: 20.0,
             color: const Color(0xFF63CA6C),
           ),
-          new Expanded(
+          Expanded(
             flex: 1,
-            child: new Container(
+            child: Container(
               height: 20.0,
               color: const Color(0xFFECECEC),
-              child: new Text("评论列表", style: new TextStyle(color: const Color(0xFF63CA6C)),)
+              child: Text("评论列表", style: TextStyle(color: const Color(0xFF63CA6C)),)
             ),
           )
         ],
       ),
     ));
-    return new Column(
+    return Column(
       children: columns,
     );
   }

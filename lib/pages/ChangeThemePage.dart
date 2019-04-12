@@ -14,28 +14,28 @@ class ChangeThemePageState extends State<ChangeThemePage> {
   List<Color> colors = ThemeUtils.supportColors;
 
   changeColorTheme(Color c) {
-    Constants.eventBus.fire(new ChangeThemeEvent(c));
+    Constants.eventBus.fire(ChangeThemeEvent(c));
   }
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text('切换主题', style: new TextStyle(color: Colors.white)),
-        iconTheme: new IconThemeData(color: Colors.white),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('切换主题', style: TextStyle(color: Colors.white)),
+        iconTheme: IconThemeData(color: Colors.white),
       ),
-      body: new Padding(
+      body: Padding(
         padding: const EdgeInsets.all(4.0),
-        child: new GridView.count(
+        child: GridView.count(
           crossAxisCount: 4,
-          children: new List.generate(colors.length, (index) {
-            return new InkWell(
+          children: List.generate(colors.length, (index) {
+            return InkWell(
               onTap: () {
                 ThemeUtils.currentColorTheme = colors[index];
                 DataUtils.setColorTheme(index);
                 changeColorTheme(colors[index]);
               },
-              child: new Container(
+              child: Container(
                 color: colors[index],
                 margin: const EdgeInsets.all(3.0),
               ),

@@ -3,22 +3,22 @@ import 'dart:async';
 import '../model/UserInfo.dart';
 
 class DataUtils {
-  static final String SP_AC_TOKEN = "accessToken";
-  static final String SP_RE_TOKEN = "refreshToken";
-  static final String SP_UID = "uid";
-  static final String SP_IS_LOGIN = "isLogin";
-  static final String SP_EXPIRES_IN = "expiresIn";
-  static final String SP_TOKEN_TYPE = "tokenType";
+  static const String SP_AC_TOKEN = "accessToken";
+  static const String SP_RE_TOKEN = "refreshToken";
+  static const String SP_UID = "uid";
+  static const String SP_IS_LOGIN = "isLogin";
+  static const String SP_EXPIRES_IN = "expiresIn";
+  static const String SP_TOKEN_TYPE = "tokenType";
 
-  static final String SP_USER_NAME = "name";
-  static final String SP_USER_ID = "id";
-  static final String SP_USER_LOC = "location";
-  static final String SP_USER_GENDER = "gender";
-  static final String SP_USER_AVATAR = "avatar";
-  static final String SP_USER_EMAIL = "email";
-  static final String SP_USER_URL = "url";
+  static const String SP_USER_NAME = "name";
+  static const String SP_USER_ID = "id";
+  static const String SP_USER_LOC = "location";
+  static const String SP_USER_GENDER = "gender";
+  static const String SP_USER_AVATAR = "avatar";
+  static const String SP_USER_EMAIL = "email";
+  static const String SP_USER_URL = "url";
 
-  static final String SP_COLOR_THEME_INDEX = "colorThemeIndex";
+  static const String SP_COLOR_THEME_INDEX = "colorThemeIndex";
 
   // 保存用户登录信息，data中包含了token等信息
   static saveLoginInfo(Map data) async {
@@ -68,7 +68,7 @@ class DataUtils {
       await sp.setString(SP_USER_LOC, location);
       await sp.setString(SP_USER_EMAIL, email);
       await sp.setString(SP_USER_URL, url);
-      UserInfo userInfo = new UserInfo(
+      UserInfo userInfo = UserInfo(
           id: id,
           name: name,
           gender: gender,
@@ -88,7 +88,7 @@ class DataUtils {
     if (isLogin == null || !isLogin) {
       return null;
     }
-    UserInfo userInfo = new UserInfo();
+    UserInfo userInfo = UserInfo();
     userInfo.id = sp.getInt(SP_USER_ID);
     userInfo.name = sp.getString(SP_USER_NAME);
     userInfo.avatar = sp.getString(SP_USER_AVATAR);

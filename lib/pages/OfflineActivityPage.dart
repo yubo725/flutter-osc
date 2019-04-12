@@ -8,7 +8,7 @@ import '../pages/CommonWebPage.dart';
 class OfflineActivityPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return new OfflineActivityPageState();
+    return OfflineActivityPageState();
   }
 }
 
@@ -18,7 +18,7 @@ class OfflineActivityPageState extends State<OfflineActivityPage> {
   String eventTypeRec = "recommend";
   int curPage = 1;
 
-  TextStyle titleTextStyle = new TextStyle(color: Colors.black, fontSize: 18.0);
+  TextStyle titleTextStyle = TextStyle(color: Colors.black, fontSize: 18.0);
 
   List recData, latestData, ychData;
 
@@ -31,7 +31,7 @@ class OfflineActivityPageState extends State<OfflineActivityPage> {
   }
 
   void getData(String type) {
-    String url = Api.EVENT_LIST;
+    String url = Api.eventList;
     url += "$type?pageIndex=$curPage&pageSize=5";
     NetUtils.get(url).then((data) {
       if (data != null) {
@@ -54,50 +54,50 @@ class OfflineActivityPageState extends State<OfflineActivityPage> {
 
   Widget getRecBody() {
     if (recData == null) {
-      return new Center(child: new CircularProgressIndicator());
+      return Center(child: CircularProgressIndicator());
     } else if (recData.length == 0) {
-      return new Center(child: new Text("暂无数据"));
+      return Center(child: Text("暂无数据"));
     } else {
-      return new ListView.builder(itemBuilder: _renderRecRow, itemCount: recData.length);
+      return ListView.builder(itemBuilder: _renderRecRow, itemCount: recData.length);
     }
   }
 
   Widget getLatestBody() {
     if (latestData == null) {
-      return new Center(child: new CircularProgressIndicator());
+      return Center(child: CircularProgressIndicator());
     } else if (latestData.length == 0) {
-      return new Center(child: new Text("暂无数据"));
+      return Center(child: Text("暂无数据"));
     } else {
-      return new ListView.builder(itemBuilder: _renderLatestRow, itemCount: latestData.length);
+      return ListView.builder(itemBuilder: _renderLatestRow, itemCount: latestData.length);
     }
   }
 
   Widget getYchBody() {
     if (ychData == null) {
-      return new Center(child: new CircularProgressIndicator());
+      return Center(child: CircularProgressIndicator());
     } else if (ychData.length == 0) {
-      return new Center(child: new Text("暂无数据"));
+      return Center(child: Text("暂无数据"));
     } else {
-      return new ListView.builder(itemBuilder: _renderYchRow, itemCount: ychData.length);
+      return ListView.builder(itemBuilder: _renderYchRow, itemCount: ychData.length);
     }
   }
 
   Widget getCard(itemData) {
-    return new Card(
-      child: new Column(
+    return Card(
+      child: Column(
         children: <Widget>[
-          new Image.network(itemData['cover'], fit: BoxFit.cover,),
-          new Container(
+          Image.network(itemData['cover'], fit: BoxFit.cover,),
+          Container(
             margin: const EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 5.0),
             alignment: Alignment.centerLeft,
-            child: new Text(itemData['title'], style: titleTextStyle,),
+            child: Text(itemData['title'], style: titleTextStyle,),
           ),
-          new Container(
+          Container(
               margin: const EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 5.0),
-              child: new Row(
+              child: Row(
                 children: <Widget>[
-                  new Expanded(child: new Text(itemData['authorName']), flex: 1,),
-                  new Text(itemData['timeStr'])
+                  Expanded(child: Text(itemData['authorName']), flex: 1,),
+                  Text(itemData['timeStr'])
                 ],
               )
           )
@@ -108,7 +108,7 @@ class OfflineActivityPageState extends State<OfflineActivityPage> {
 
   Widget _renderRecRow(BuildContext ctx, int i) {
     Map itemData = recData[i];
-    return new InkWell(
+    return InkWell(
       child: getCard(itemData),
       onTap: () {
         _showDetail(itemData['detailUrl']);
@@ -118,7 +118,7 @@ class OfflineActivityPageState extends State<OfflineActivityPage> {
 
   Widget _renderLatestRow(BuildContext ctx, int i) {
     Map itemData = latestData[i];
-    return new InkWell(
+    return InkWell(
       child: getCard(itemData),
       onTap: () {
         _showDetail(itemData['detailUrl']);
@@ -128,7 +128,7 @@ class OfflineActivityPageState extends State<OfflineActivityPage> {
 
   Widget _renderYchRow(BuildContext ctx, int i) {
     Map itemData = ychData[i];
-    return new InkWell(
+    return InkWell(
       child: getCard(itemData),
       onTap: () {
         _showDetail(itemData['detailUrl']);
@@ -137,38 +137,38 @@ class OfflineActivityPageState extends State<OfflineActivityPage> {
   }
 
   _showDetail(detailUrl) {
-    Navigator.of(context).push(new MaterialPageRoute(
+    Navigator.of(context).push(MaterialPageRoute(
       builder: (ctx) {
-        return new CommonWebPage(title: '活动详情', url: detailUrl);
+        return CommonWebPage(title: '活动详情', url: detailUrl);
       }
     ));
   }
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text("线下活动", style: new TextStyle(color: Colors.white)),
-        iconTheme: new IconThemeData(color: Colors.white),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("线下活动", style: TextStyle(color: Colors.white)),
+        iconTheme: IconThemeData(color: Colors.white),
       ),
-      body: new DefaultTabController(
+      body: DefaultTabController(
         length: 3,
-        child: new Scaffold(
-            appBar: new TabBar(
+        child: Scaffold(
+            appBar: TabBar(
               labelColor: Colors.black,
               tabs: <Widget>[
-                new Tab(
+                Tab(
                   text: "强力推荐",
                 ),
-                new Tab(
+                Tab(
                   text: "最新活动",
                 ),
-                new Tab(
+                Tab(
                   text: "源创会",
                 )
               ],
             ),
-            body: new TabBarView(
+            body: TabBarView(
               children: <Widget>[
                 getRecBody(),
                 getLatestBody(),

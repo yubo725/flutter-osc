@@ -4,12 +4,12 @@ import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
 class NewsDetailPage extends StatefulWidget {
 
-  String id;
+  final String id;
 
   NewsDetailPage({Key key, this.id}):super(key: key);
 
   @override
-  State<StatefulWidget> createState() => new NewsDetailPageState(id: this.id);
+  State<StatefulWidget> createState() => NewsDetailPageState(id: this.id);
 }
 
 class NewsDetailPageState extends State<NewsDetailPage> {
@@ -17,7 +17,7 @@ class NewsDetailPageState extends State<NewsDetailPage> {
   String id;
   bool loaded = false;
   String detailDataStr;
-  final flutterWebViewPlugin = new FlutterWebviewPlugin();
+  final flutterWebViewPlugin = FlutterWebviewPlugin();
 
   NewsDetailPageState({Key key, this.id});
 
@@ -39,19 +39,19 @@ class NewsDetailPageState extends State<NewsDetailPage> {
   @override
   Widget build(BuildContext context) {
     List<Widget> titleContent = [];
-    titleContent.add(new Text("资讯详情", style: new TextStyle(color: Colors.white),));
+    titleContent.add(Text("资讯详情", style: TextStyle(color: Colors.white),));
     if (!loaded) {
-      titleContent.add(new CupertinoActivityIndicator());
+      titleContent.add(CupertinoActivityIndicator());
     }
-    titleContent.add(new Container(width: 50.0));
-    return new WebviewScaffold(
+    titleContent.add(Container(width: 50.0));
+    return WebviewScaffold(
       url: this.id,
-      appBar: new AppBar(
-        title: new Row(
+      appBar: AppBar(
+        title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: titleContent,
         ),
-        iconTheme: new IconThemeData(color: Colors.white),
+        iconTheme: IconThemeData(color: Colors.white),
       ),
       withZoom: false,
       withLocalStorage: true,

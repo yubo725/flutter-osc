@@ -14,23 +14,23 @@ class CommonButton extends StatefulWidget {
 class CommonButtonState extends State<CommonButton> {
 
   Color color = ThemeUtils.currentColorTheme;
-  TextStyle textStyle = new TextStyle(color: Colors.white, fontSize: 17);
+  TextStyle textStyle = TextStyle(color: Colors.white, fontSize: 17);
 
   @override
   Widget build(BuildContext context) {
-    return new InkWell(
+    return InkWell(
       onTap: () {
         this.widget.onTap();
       },
-      child: new Container(
+      child: Container(
         height: 45,
-        decoration: new BoxDecoration(
+        decoration: BoxDecoration(
           color: color,
-          border: new Border.all(color: const Color(0xffcccccc)),
-          borderRadius: new BorderRadius.all(new Radius.circular(30))
+          border: Border.all(color: const Color(0xffcccccc)),
+          borderRadius: BorderRadius.all(Radius.circular(30))
         ),
-        child: new Center(
-          child: new Text(this.widget.text, style: textStyle,),
+        child: Center(
+          child: Text(this.widget.text, style: textStyle,),
         ),
       ),
     );

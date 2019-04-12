@@ -4,21 +4,21 @@ import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
 //公共的WebView页面，需要标题和URL参数
 class CommonWebPage extends StatefulWidget {
-  String title;
-  String url;
+  final String title;
+  final String url;
 
   CommonWebPage({Key key, this.title, this.url}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
-    return new CommonWebPageState();
+    return CommonWebPageState();
   }
 }
 
 class CommonWebPageState extends State<CommonWebPage> {
   bool loading = true;
 
-  final flutterWebViewPlugin = new FlutterWebviewPlugin();
+  final flutterWebViewPlugin = FlutterWebviewPlugin();
 
   @override
   void initState() {
@@ -46,22 +46,22 @@ class CommonWebPageState extends State<CommonWebPage> {
   @override
   Widget build(BuildContext context) {
     List<Widget> titleContent = [];
-    titleContent.add(new Text(
+    titleContent.add(Text(
       widget.title,
-      style: new TextStyle(color: Colors.white),
+      style: TextStyle(color: Colors.white),
     ));
     if (loading) {
-      titleContent.add(new CupertinoActivityIndicator());
+      titleContent.add(CupertinoActivityIndicator());
     }
-    titleContent.add(new Container(width: 50.0));
-    return new WebviewScaffold(
+    titleContent.add(Container(width: 50.0));
+    return WebviewScaffold(
       url: widget.url,
-      appBar: new AppBar(
-        title: new Row(
+      appBar: AppBar(
+        title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: titleContent,
         ),
-        iconTheme: new IconThemeData(color: Colors.white),
+        iconTheme: IconThemeData(color: Colors.white),
       ),
       withZoom: true,
       withLocalStorage: true,

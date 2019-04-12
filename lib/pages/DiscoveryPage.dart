@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
 import 'dart:async';
-import 'OfflineActivityPage.dart';
 import 'CommonWebPage.dart';
+import 'OfflineActivityPage.dart';
+import 'package:flutter/material.dart';
 import 'package:barcode_scan/barcode_scan.dart';
 
 class DiscoveryPage extends StatelessWidget {
@@ -26,9 +26,9 @@ class DiscoveryPage extends StatelessWidget {
   final titles = [
     "开源软件", "码云推荐", "代码片段", "扫一扫", "摇一摇", "码云封面人物", "线下活动"
   ];
-  final rightArrowIcon = new Image.asset('images/ic_arrow_right.png', width: ARROW_ICON_WIDTH, height: ARROW_ICON_WIDTH,);
-  final titleTextStyle = new TextStyle(fontSize: 16.0);
-  List listData = [];
+  final rightArrowIcon = Image.asset('images/ic_arrow_right.png', width: ARROW_ICON_WIDTH, height: ARROW_ICON_WIDTH,);
+  final titleTextStyle = TextStyle(fontSize: 16.0);
+  final List listData = [];
 
   DiscoveryPage() {
     initData();
@@ -37,7 +37,7 @@ class DiscoveryPage extends StatelessWidget {
   initData() {
     listData.add(TAG_START);
     for (int i = 0; i < 3; i++) {
-      listData.add(new ListItem(title: titles[i], icon: imagePaths[i]));
+      listData.add(ListItem(title: titles[i], icon: imagePaths[i]));
       if (i == 2) {
         listData.add(TAG_END);
       } else {
@@ -47,7 +47,7 @@ class DiscoveryPage extends StatelessWidget {
     listData.add(TAG_BLANK);
     listData.add(TAG_START);
     for (int i = 3; i < 5; i++) {
-      listData.add(new ListItem(title: titles[i], icon: imagePaths[i]));
+      listData.add(ListItem(title: titles[i], icon: imagePaths[i]));
       if (i == 4) {
         listData.add(TAG_END);
       } else {
@@ -57,7 +57,7 @@ class DiscoveryPage extends StatelessWidget {
     listData.add(TAG_BLANK);
     listData.add(TAG_START);
     for (int i = 5; i < 7; i++) {
-      listData.add(new ListItem(title: titles[i], icon: imagePaths[i]));
+      listData.add(ListItem(title: titles[i], icon: imagePaths[i]));
       if (i == 6) {
         listData.add(TAG_END);
       } else {
@@ -67,9 +67,9 @@ class DiscoveryPage extends StatelessWidget {
   }
 
   Widget getIconImage(path) {
-    return new Padding(
+    return Padding(
       padding: const EdgeInsets.fromLTRB(0.0, 0.0, 10.0, 0.0),
-      child: new Image.asset(path, width: IMAGE_ICON_WIDTH, height: IMAGE_ICON_WIDTH),
+      child: Image.asset(path, width: IMAGE_ICON_WIDTH, height: IMAGE_ICON_WIDTH),
     );
   }
 
@@ -78,37 +78,37 @@ class DiscoveryPage extends StatelessWidget {
     if (item is String) {
       switch (item) {
         case TAG_START:
-          return new Divider(height: 1.0,);
+          return Divider(height: 1.0,);
           break;
         case TAG_END:
-          return new Divider(height: 1.0,);
+          return Divider(height: 1.0,);
           break;
         case TAG_CENTER:
-          return new Padding(
+          return Padding(
             padding: const EdgeInsets.fromLTRB(50.0, 0.0, 0.0, 0.0),
-            child: new Divider(height: 1.0,),
+            child: Divider(height: 1.0,),
           );
           break;
         case TAG_BLANK:
-          return new Container(
+          return Container(
             height: 20.0,
           );
           break;
       }
     } else if (item is ListItem) {
-      var listItemContent =  new Padding(
+      var listItemContent =  Padding(
         padding: const EdgeInsets.fromLTRB(10.0, 15.0, 10.0, 15.0),
-        child: new Row(
+        child: Row(
           children: <Widget>[
             getIconImage(item.icon),
-            new Expanded(
-                child: new Text(item.title, style: titleTextStyle,)
+            Expanded(
+                child: Text(item.title, style: titleTextStyle,)
             ),
             rightArrowIcon
           ],
         ),
       );
-      return new InkWell(
+      return InkWell(
         onTap: () {
           handleListItemClick(ctx, item);
         },
@@ -122,33 +122,33 @@ class DiscoveryPage extends StatelessWidget {
     if (title == "扫一扫") {
       scan();
     } else if (title == "线下活动") {
-      Navigator.of(ctx).push(new MaterialPageRoute(
+      Navigator.of(ctx).push(MaterialPageRoute(
         builder: (context) {
-          return new OfflineActivityPage();
+          return OfflineActivityPage();
         }
       ));
     } else if (title == "码云推荐") {
-      Navigator.of(ctx).push(new MaterialPageRoute(
+      Navigator.of(ctx).push(MaterialPageRoute(
           builder: (context) {
-            return new CommonWebPage(title: "码云推荐", url: "https://m.gitee.com/explore");
+            return CommonWebPage(title: "码云推荐", url: "https://m.gitee.com/explore");
           }
       ));
     } else if (title == "代码片段") {
-      Navigator.of(ctx).push(new MaterialPageRoute(
+      Navigator.of(ctx).push(MaterialPageRoute(
           builder: (context) {
-            return new CommonWebPage(title: "代码片段", url: "https://m.gitee.com/gists");
+            return CommonWebPage(title: "代码片段", url: "https://m.gitee.com/gists");
           }
       ));
     } else if (title == "开源软件") {
-      Navigator.of(ctx).push(new MaterialPageRoute(
+      Navigator.of(ctx).push(MaterialPageRoute(
           builder: (context) {
-            return new CommonWebPage(title: "开源软件", url: "https://m.gitee.com/explore");
+            return CommonWebPage(title: "开源软件", url: "https://m.gitee.com/explore");
           }
       ));
     } else if (title == "码云封面人物") {
-      Navigator.of(ctx).push(new MaterialPageRoute(
+      Navigator.of(ctx).push(MaterialPageRoute(
           builder: (context) {
-            return new CommonWebPage(title: "码云封面人物", url: "https://m.gitee.com/gitee-stars/");
+            return CommonWebPage(title: "码云封面人物", url: "https://m.gitee.com/gitee-stars/");
           }
       ));
     }
@@ -165,9 +165,9 @@ class DiscoveryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new Padding(
+    return Padding(
       padding: const EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 0.0),
-      child: new ListView.builder(
+      child: ListView.builder(
         itemCount: listData.length,
         itemBuilder: (context, i) => renderRow(context, i),
       ),

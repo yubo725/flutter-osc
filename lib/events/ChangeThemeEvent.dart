@@ -4,7 +4,5 @@ class ChangeThemeEvent {
 
   Color color;
 
-  ChangeThemeEvent(Color c) {
-    color = c;
-  }
+  ChangeThemeEvent(this.color);
 }

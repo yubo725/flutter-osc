@@ -6,18 +6,18 @@ import 'CommonWebPage.dart';
 class AboutPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return new AboutPageState();
+    return AboutPageState();
   }
 }
 
 class AboutPageState extends State<AboutPage> {
   bool showImage = false;
-  TextStyle textStyle = new TextStyle(
+  TextStyle textStyle = TextStyle(
       color: Colors.blue,
-      decoration: new TextDecoration.combine([TextDecoration.underline]));
-  Widget authorLink, mayunLink, githubLink;
-  List<String> urls = new List();
-  List<String> titles = new List();
+      decoration: TextDecoration.combine([TextDecoration.underline]));
+  Widget authorLink, maYunLink, githubLink;
+  List<String> urls = List();
+  List<String> titles = List();
 
   AboutPageState() {
     titles.add("yubo's blog");
@@ -26,14 +26,14 @@ class AboutPageState extends State<AboutPage> {
     urls.add("https://yubo725.top");
     urls.add("https://gitee.com/yubo725");
     urls.add("https://github.com/yubo725");
-    authorLink = new GestureDetector(
-      child: new Container(
+    authorLink = GestureDetector(
+      child: Container(
         margin: const EdgeInsets.fromLTRB(0.0, 80.0, 0.0, 0.0),
-        child: new Row(
+        child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            new Text("作者："),
-            new Text(
+            Text("作者："),
+            Text(
               "yubo",
               style: textStyle,
             ),
@@ -42,14 +42,14 @@ class AboutPageState extends State<AboutPage> {
       ),
       onTap: getLink(0),
     );
-    mayunLink = new GestureDetector(
-      child: new Container(
+    maYunLink = GestureDetector(
+      child: Container(
         margin: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
-        child: new Row(
+        child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            new Text("码云："),
-            new Text(
+            Text("码云："),
+            Text(
               "https://gitee.com/yubo725",
               style: textStyle,
             )
@@ -58,14 +58,14 @@ class AboutPageState extends State<AboutPage> {
       ),
       onTap: getLink(1),
     );
-    githubLink = new GestureDetector(
-      child: new Container(
+    githubLink = GestureDetector(
+      child: Container(
         margin: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
-        child: new Row(
+        child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            new Text("GitHub："),
-            new Text(
+            Text("GitHub："),
+            Text(
               "https://github.com/yubo725",
               style: textStyle,
             ),
@@ -80,23 +80,23 @@ class AboutPageState extends State<AboutPage> {
     String url = urls[index];
     String title = titles[index];
     return () {
-      Navigator.of(context).push(new MaterialPageRoute(builder: (ctx) {
-        return new CommonWebPage(title: title, url: url);
+      Navigator.of(context).push(MaterialPageRoute(builder: (ctx) {
+        return CommonWebPage(title: title, url: url);
       }));
     };
   }
 
   Widget getImageOrBtn() {
     if (!showImage) {
-      return new Container(
-        child: new Center(
-          child: new InkWell(
-            child: new Container(
+      return Container(
+        child: Center(
+          child: InkWell(
+            child: Container(
               padding: const EdgeInsets.fromLTRB(15.0, 8.0, 15.0, 8.0),
-              child: new Text("不要点我"),
-              decoration: new BoxDecoration(
-                  border: new Border.all(color: Colors.black),
-                  borderRadius: new BorderRadius.all(new Radius.circular(5.0))),
+              child: Text("不要点我"),
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black),
+                  borderRadius: BorderRadius.all(Radius.circular(5.0))),
             ),
             onTap: () {
               setState(() {
@@ -107,7 +107,7 @@ class AboutPageState extends State<AboutPage> {
         ),
       );
     } else {
-      return new Image.asset(
+      return Image.asset(
         './images/ic_hongshu.jpg',
         width: 100.0,
         height: 100.0,
@@ -117,34 +117,34 @@ class AboutPageState extends State<AboutPage> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text("关于", style: new TextStyle(color: Colors.white)),
-        iconTheme: new IconThemeData(color: Colors.white),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("关于", style: TextStyle(color: Colors.white)),
+        iconTheme: IconThemeData(color: Colors.white),
       ),
-      body: new Center(
-        child: new Column(
+      body: Center(
+        child: Column(
           children: <Widget>[
-            new Container(
+            Container(
               width: 1.0,
               height: 100.0,
               color: Colors.transparent,
             ),
-            new Image.asset(
+            Image.asset(
               './images/ic_osc_logo.png',
               width: 200.0,
               height: 56.0,
             ),
-            new Text("基于Google Flutter的开源中国客户端"),
+            Text("基于Google Flutter的开源中国客户端"),
             authorLink,
-            mayunLink,
+            maYunLink,
             githubLink,
-            new Expanded(flex: 1, child: getImageOrBtn()),
-            new Container(
+            Expanded(flex: 1, child: getImageOrBtn()),
+            Container(
                 margin: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 15.0),
-                child: new Text(
+                child: Text(
                   "本项目仅供学习使用，与开源中国官方无关",
-                  style: new TextStyle(fontSize: 12.0),
+                  style: TextStyle(fontSize: 12.0),
                 ))
           ],
         ),

@@ -22,21 +22,21 @@ class CircleImageState extends State<CircleImage> {
   Widget build(BuildContext context) {
     var img;
     if (widget.type == CircleImageType.network) {
-      img = new Image.network(widget.path, width: widget.width, height: widget.height);
+      img = Image.network(widget.path, width: widget.width, height: widget.height);
     } else {
-      img = new Image.asset(widget.path, width: widget.width, height: widget.height);
+      img = Image.asset(widget.path, width: widget.width, height: widget.height);
     }
-    return new Container(
+    return Container(
       width: widget.width,
       height: widget.height,
-      decoration: new BoxDecoration(
+      decoration: BoxDecoration(
         shape: BoxShape.circle,
         color: Colors.blue,
-        image: new DecorationImage(
+        image: DecorationImage(
             image: img,
             fit: BoxFit.cover
         ),
-        border: new Border.all(
+        border: Border.all(
           color: Colors.white,
           width: 2.0,
         ),

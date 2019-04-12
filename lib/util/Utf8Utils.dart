@@ -6,7 +6,7 @@ class Utf8Utils {
       return null;
     }
     List<int> list = utf8.encode(origin);
-    StringBuffer sb = new StringBuffer();
+    StringBuffer sb = StringBuffer();
     for (int i in list) {
       sb.write("$i,");
     }
@@ -20,7 +20,7 @@ class Utf8Utils {
     }
     List<String> list = encodeStr.split(",");
     if (list != null && list.isNotEmpty) {
-      List<int> intList = new List();
+      List<int> intList = List();
       for (String s in list) {
         intList.add(int.parse(s));
       }

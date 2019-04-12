@@ -6,7 +6,7 @@ class NetUtils {
   static Future<String> get(String url, {Map<String, String> params}) async {
     if (params != null && params.isNotEmpty) {
       // 如果参数不为空，则将参数拼接到URL后面
-      StringBuffer sb = new StringBuffer("?");
+      StringBuffer sb = StringBuffer("?");
       params.forEach((key, value) {
         sb.write("$key" + "=" + "$value" + "&");
       });
@@ -25,7 +25,7 @@ class NetUtils {
   }
 
   static Map<String, String> getCommonHeader() {
-    Map<String, String> header = new Map();
+    Map<String, String> header = Map();
     header['is_flutter_osc'] = "1";
     return header;
   }
