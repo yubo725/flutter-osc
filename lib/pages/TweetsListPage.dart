@@ -70,44 +70,40 @@ class TweetsListPageState extends State<TweetsListPage> {
   }
 
   getTweetsList(bool isLoadMore, bool isHot) {
-    DataUtils.isLogin().then((isLogin) {
-      if (isLogin) {
-        DataUtils.getAccessToken().then((token) {
-          if (token == null || token.length == 0) {
-            return;
-          }
-          loading = true;
-          Map<String, String> params = Map();
-          params['access_token'] = token;
-          params['page'] = "$curPage";
-          if (isHot) {
-            params['user'] = "-1";
-          } else {
-            params['user'] = "0";
-          }
-          params['pageSize'] = "20";
-          params['dataType'] = "json";
-          NetUtils.get(Api.tweetsList, params: params).then((data) {
-            Map<String, dynamic> obj = json.decode(data);
-            if (!isLoadMore) {
-              // first load
-              if (isHot) {
-                hotTweetsList = obj['tweetlist'];
-              } else {
-                normalTweetsList = obj['tweetlist'];
-              }
-            } else {
-              // load more
-              List list = List();
-              list.addAll(normalTweetsList);
-              list.addAll(obj['tweetlist']);
-              normalTweetsList = list;
-            }
-            filterList(hotTweetsList, true);
-            filterList(normalTweetsList, false);
-          });
-        });
+    DataUtils.getAccessToken().then((token) {
+      if (token == null || token.length == 0) {
+        return;
       }
+      loading = true;
+      Map<String, String> params = Map();
+      params['access_token'] = token;
+      params['page'] = "$curPage";
+      if (isHot) {
+        params['user'] = "-1";
+      } else {
+        params['user'] = "0";
+      }
+      params['pageSize'] = "20";
+      params['dataType'] = "json";
+      NetUtils.get(Api.tweetsList, params: params).then((data) {
+        Map<String, dynamic> obj = json.decode(data);
+        if (!isLoadMore) {
+          // first load
+          if (isHot) {
+            hotTweetsList = obj['tweetlist'];
+          } else {
+            normalTweetsList = obj['tweetlist'];
+          }
+        } else {
+          // load more
+          List list = List();
+          list.addAll(normalTweetsList);
+          list.addAll(obj['tweetlist']);
+          normalTweetsList = list;
+        }
+        filterList(hotTweetsList, true);
+        filterList(normalTweetsList, false);
+      });
     });
   }
 
@@ -460,7 +456,7 @@ class TweetsListPageState extends State<TweetsListPage> {
               child: Center(
                 child: Column(
                   children: <Widget>[
-                    Text("由于OSC的openapi限制"),
+                    Text("由于OSC的Open API限制"),
                     Text("必须登录后才能获取动弹信息")
                   ],
                 ),

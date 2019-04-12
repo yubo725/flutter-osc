@@ -9,7 +9,10 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd2fdf53-d104-4eca-8fd5-439747eda92e" name="Default" comment="update libs" />
+    <list default="true" id="cd2fdf53-d104-4eca-8fd5-439747eda92e" name="Default" comment="update libs">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/TweetsListPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/TweetsListPage.dart" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
     <ignored path="$PROJECT_DIR$/.pub/" />
@@ -32,7 +35,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="dart" value="108" />
+          <entry key="dart" value="109" />
           <entry key="gitignore" value="1" />
           <entry key="java" value="1" />
           <entry key="jpeg" value="1" />
@@ -42,7 +45,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Dart" value="108" />
+          <entry key="Dart" value="109" />
           <entry key="Image" value="15" />
           <entry key="JAVA" value="1" />
           <entry key="PLAIN_TEXT" value="1" />
@@ -50,13 +53,13 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="dart" value="3448" />
+          <entry key="dart" value="3485" />
           <entry key="java" value="44" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Dart" value="3448" />
+          <entry key="Dart" value="3485" />
           <entry key="JAVA" value="44" />
         </counts>
       </usages-collector>
@@ -64,80 +67,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/pages/NewsListPage.dart">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="281">
-              <caret line="117" column="23" selection-start-line="117" selection-start-column="23" selection-end-line="117" selection-end-column="23" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/test.dart">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="38">
-              <caret line="2" column="50" lean-forward="true" selection-start-line="2" selection-start-column="50" selection-end-line="2" selection-end-column="50" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/pages/MyInfoPage.dart">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-830">
-              <caret line="15" selection-start-line="15" selection-end-line="15" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/main.dart">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="38" column="20" selection-start-line="38" selection-start-column="20" selection-end-line="39" selection-end-column="22" />
-              <folding>
-                <element signature="e#0#40#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/lib/widgets/SlideView.dart">
+        <entry file="file://$PROJECT_DIR$/lib/pages/TweetsListPage.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="9">
-              <caret line="6" column="18" lean-forward="true" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="18" />
-              <folding>
-                <element signature="e#0#39#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/events/LogoutEvent.dart">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="19">
-              <caret line="1" selection-start-line="1" selection-end-line="3" selection-end-column="1" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/model/UserInfo.dart">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="14" column="1" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/pages/AboutPage.dart">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
-              <caret line="7" column="39" selection-start-line="7" selection-start-column="39" selection-end-line="7" selection-end-column="39" />
+            <state relative-caret-position="29">
+              <caret line="101" column="44" lean-forward="true" selection-start-line="101" selection-start-column="44" selection-end-line="101" selection-end-column="44" />
             </state>
           </provider>
         </entry>
@@ -166,6 +100,8 @@
       <find>init</find>
       <find>indicator</find>
       <find>setSte</find>
+      <find>isUserLogin</find>
+      <find>build(</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -198,7 +134,6 @@
         <option value="$PROJECT_DIR$/lib/pages/NewLoginPage.dart" />
         <option value="$PROJECT_DIR$/lib/pages/OfflineActivityPage.dart" />
         <option value="$PROJECT_DIR$/lib/pages/PublishTweetPage.dart" />
-        <option value="$PROJECT_DIR$/lib/pages/TweetsListPage.dart" />
         <option value="$PROJECT_DIR$/lib/util/NetUtils.dart" />
         <option value="$PROJECT_DIR$/lib/util/Utf8Utils.dart" />
         <option value="$PROJECT_DIR$/lib/widgets/CircleImage.dart" />
@@ -222,6 +157,7 @@
         <option value="$PROJECT_DIR$/lib/test.dart" />
         <option value="$PROJECT_DIR$/lib/pages/NewsListPage.dart" />
         <option value="$PROJECT_DIR$/lib/widgets/SlideView.dart" />
+        <option value="$PROJECT_DIR$/lib/pages/TweetsListPage.dart" />
       </list>
     </option>
   </component>
@@ -251,6 +187,12 @@
               <item name="flutter_osc" type="b2602c69:ProjectViewProjectNode" />
               <item name="flutter_osc" type="462c0819:PsiDirectoryNode" />
               <item name="lib" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="flutter_osc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="flutter_osc" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -370,7 +312,7 @@
       <window_info id="Capture Tool" order="7" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32916668" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49427754" weight="0.5708333" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49427754" weight="0.4236111" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -380,7 +322,7 @@
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50572246" side_tool="true" weight="0.28278688" />
       <window_info anchor="bottom" id="Logcat" order="10" weight="0.32777777" />
       <window_info anchor="bottom" id="Version Control" order="11" weight="0.32914925" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="12" sideWeight="0.49427754" visible="true" weight="0.34166667" />
+      <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.49427754" weight="0.48472223" />
       <window_info anchor="bottom" id="Messages" order="13" weight="0.32635984" />
       <window_info anchor="bottom" id="Flutter Performance" order="14" side_tool="true" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -400,6 +342,17 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="update libs" />
     <option name="LAST_COMMIT_MESSAGE" value="update libs" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="Dart">
+          <url>file://$PROJECT_DIR$/lib/pages/TweetsListPage.dart</url>
+          <line>432</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/images/ic_discover_shake.png">
@@ -586,13 +539,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/pages/TweetsListPage.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9291">
-          <caret line="502" column="12" selection-start-line="502" selection-start-column="12" selection-end-line="502" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/pages/TweetDetailPage.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="98">
@@ -740,11 +686,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/widgets/SlideView.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9">
-          <caret line="6" column="18" lean-forward="true" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="18" />
+        <state relative-caret-position="28">
+          <caret line="7" column="46" lean-forward="true" selection-start-line="7" selection-start-column="46" selection-end-line="7" selection-end-column="46" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/pages/TweetsListPage.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="29">
+          <caret line="101" column="44" lean-forward="true" selection-start-line="101" selection-start-column="44" selection-end-line="101" selection-end-column="44" />
         </state>
       </provider>
     </entry>
