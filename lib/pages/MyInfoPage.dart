@@ -109,20 +109,24 @@ class MyInfoPageState extends State<MyInfoPage> {
 
   // 获取用户信息
   getUserInfo() async {
-    SharedPreferences sp = await SharedPreferences.getInstance();
-    String accessToken = sp.get(DataUtils.SP_AC_TOKEN);
-    Map<String, String> params = Map();
-    params['access_token'] = accessToken;
-    NetUtils.get(Api.userInfo, params: params).then((data) {
-      if (data != null) {
-        var map = json.decode(data);
-        setState(() {
-          userAvatar = map['avatar'];
-          userName = map['name'];
-        });
-        DataUtils.saveUserInfo(map);
-      }
-    });
+    try {
+      SharedPreferences sp = await SharedPreferences.getInstance();
+      String accessToken = sp.get(DataUtils.SP_AC_TOKEN);
+      Map<String, String> params = Map();
+      params['access_token'] = accessToken;
+      NetUtils.get(Api.userInfo, params: params).then((data) {
+        if (data != null) {
+          var map = json.decode(data);
+          setState(() {
+            userAvatar = map['avatar'];
+            userName = map['name'];
+          });
+          DataUtils.saveUserInfo(map);
+        }
+      });
+    } catch (e) {
+      print(e);
+    }
   }
 
   _login() async {

@@ -3,8 +3,8 @@
     <CLASSES>
       <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.flutter-io.cn/shared_preferences-0.4.3" />
       <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.flutter-io.cn/barcode_scan-0.0.8" />
-      <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.flutter-io.cn/flutter_webview_plugin-0.3.3" />
       <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.flutter-io.cn/image_picker-0.4.12+1" />
+      <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.flutter-io.cn/flutter_webview_plugin-0.3.3" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

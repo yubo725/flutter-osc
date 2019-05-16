@@ -2,7 +2,7 @@ class Api {
   static final String host = "https://www.oschina.net";
 
   // 资讯列表
-  static final String newsList = "http://osc.yubo725.top/news/list";
+  static final String newsList = "http://osc.yubo.me/news/list";
 
   // 资讯详情
   static final String newsDetail = host + "/action/openapi/news_detail";
@@ -23,14 +23,14 @@ class Api {
   static final String pubTweet = host + "/action/openapi/tweet_pub";
 
   // 添加到小黑屋
-  static final String addToBlack = "http://osc.yubo725.top/black/add";
+  static final String addToBlack = "http://osc.yubo.me/black/add";
 
   // 查询小黑屋
-  static final String queryBlack = "http://osc.yubo725.top/black/query";
+  static final String queryBlack = "http://osc.yubo.me/black/query";
 
   // 从小黑屋中删除
-  static final String deleteBlack = "http://osc.yubo725.top/black/delete";
+  static final String deleteBlack = "http://osc.yubo.me/black/delete";
 
   // 开源活动
-  static final String eventList = "http://osc.yubo725.top/events/";
+  static final String eventList = "http://osc.yubo.me/events/";
 }

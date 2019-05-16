@@ -33,6 +33,8 @@ class NewLoginPageState extends State<NewLoginPage> {
   bool isOnLogin = false;
   // 是否隐藏输入的文本
   bool obscureText = true;
+  // 是否解析了结果
+  bool parsedResult = false;
 
   final usernameCtrl = TextEditingController(text: '');
   final passwordCtrl = TextEditingController(text: '');
@@ -104,9 +106,8 @@ class NewLoginPageState extends State<NewLoginPage> {
     _onUrlChanged = flutterWebViewPlugin.onUrlChanged.listen((url) {
       // 登录成功会跳转到自定义的回调页面，该页面地址为http://yubo725.top/osc/osc.php?code=xxx
       // 该页面会接收code，然后根据code换取AccessToken，并将获取到的token及其他信息，通过js的get()方法返回
-      if (url != null && url.length > 0 && url.contains("osc/osc.php?code=")) {
+      if (url != null && url.length > 0 && url.contains("/logincallback?")) {
         isLoadingCallbackPage = true;
-        print("URL变为回调页");
       }
     });
   }
@@ -140,7 +141,11 @@ class NewLoginPageState extends State<NewLoginPage> {
 
   // 解析WebView中的数据
   void parseResult() {
-    flutterWebViewPlugin.evalJavascript("get();").then((result) {
+    if (parsedResult) {
+      return;
+    }
+    parsedResult = true;
+    flutterWebViewPlugin.evalJavascript("window.atob(get())").then((result) {
       // result json字符串，包含token信息
       if (result != null && result.length > 0) {
         // 拿到了js中的数据
@@ -215,8 +220,8 @@ class NewLoginPageState extends State<NewLoginPage> {
               height: 0.0,
               child: WebviewScaffold(
                 key: _scaffoldKey,
-                url: Constants.loginUrl, // 登录的URL
                 hidden: true,
+                url: Constants.loginUrl, // 登录的URL
                 withZoom: true,  // 允许网页缩放
                 withLocalStorage: true, // 允许LocalStorage
                 withJavascript: true, // 允许执行js代码
