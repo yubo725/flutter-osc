@@ -9,6 +9,8 @@ import 'package:flutter_osc/util/ThemeUtils.dart';
 import 'package:flutter_osc/widgets/CommonButton.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
+import 'AboutPage.dart';
+
 // 新的登录界面，隐藏WebView登录页面
 class NewLoginPage extends StatefulWidget {
   @override
@@ -290,26 +292,25 @@ class NewLoginPageState extends State<NewLoginPage> {
                   Expanded(
                     child: loadingView
                   ),
-                  Container(
-                    margin: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 10.0),
-                    alignment: Alignment.bottomCenter,
-                    child: InkWell(
-                      child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Text("使用WebView登录方式", style: TextStyle(fontSize: 13.0, color: ThemeUtils.currentColorTheme))
-                      ),
-                      onTap: () async {
-//                        Navigator.pop(context);
-                        // 跳转到LoginPage
-                        final result = await Navigator.push(context, MaterialPageRoute(builder: (context) {
-                          return LoginPage();
-                        }));
-                        if (result != null && result == "refresh") {
-                          Navigator.pop(context, "refresh");
-                        }
-                      },
-                    ),
-                  ),
+//                  Container(
+//                    margin: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 10.0),
+//                    alignment: Alignment.bottomCenter,
+//                    child: InkWell(
+//                      child: Padding(
+//                          padding: const EdgeInsets.all(10.0),
+//                          child: Text("使用WebView登录方式", style: TextStyle(fontSize: 13.0, color: ThemeUtils.currentColorTheme))
+//                      ),
+//                      onTap: () async {
+//                        // 跳转到LoginPage
+//                        final result = await Navigator.push(context, MaterialPageRoute(builder: (context) {
+//                          return LoginPage();
+//                        }));
+//                        if (result != null && result == "refresh") {
+//                          Navigator.pop(context, "refresh");
+//                        }
+//                      },
+//                    ),
+//                  ),
                 ],
               )
             )
