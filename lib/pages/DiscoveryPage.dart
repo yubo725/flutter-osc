@@ -78,22 +78,17 @@ class DiscoveryPage extends StatelessWidget {
     if (item is String) {
       switch (item) {
         case TAG_START:
-          return Divider(height: 1.0,);
-          break;
         case TAG_END:
           return Divider(height: 1.0,);
-          break;
         case TAG_CENTER:
           return Padding(
             padding: const EdgeInsets.fromLTRB(50.0, 0.0, 0.0, 0.0),
             child: Divider(height: 1.0,),
           );
-          break;
         case TAG_BLANK:
           return Container(
             height: 20.0,
           );
-          break;
       }
     } else if (item is ListItem) {
       var listItemContent =  Padding(

@@ -10,7 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cd2fdf53-d104-4eca-8fd5-439747eda92e" name="Default" comment="update libs">
-      <change beforePath="$PROJECT_DIR$/lib/pages/NewLoginPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/NewLoginPage.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
@@ -26,7 +26,7 @@
     <session id="601274952">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="2" />
+          <entry key="project.closed" value="3" />
           <entry key="project.open.time.3" value="2" />
           <entry key="project.open.time.4" value="1" />
           <entry key="project.opened" value="3" />
@@ -40,6 +40,7 @@
           <entry key="jpeg" value="1" />
           <entry key="jpg" value="3" />
           <entry key="lock" value="1" />
+          <entry key="md" value="1" />
           <entry key="png" value="11" />
           <entry key="yaml" value="2" />
         </counts>
@@ -49,6 +50,7 @@
           <entry key="Dart" value="125" />
           <entry key="Image" value="15" />
           <entry key="JAVA" value="1" />
+          <entry key="Markdown" value="1" />
           <entry key="PLAIN_TEXT" value="2" />
           <entry key="YAML" value="2" />
         </counts>
@@ -57,6 +59,7 @@
         <counts>
           <entry key="dart" value="4863" />
           <entry key="java" value="44" />
+          <entry key="md" value="63" />
           <entry key="yaml" value="36" />
         </counts>
       </usages-collector>
@@ -64,6 +67,7 @@
         <counts>
           <entry key="Dart" value="4863" />
           <entry key="JAVA" value="44" />
+          <entry key="Markdown" value="63" />
           <entry key="YAML" value="36" />
         </counts>
       </usages-collector>
@@ -74,8 +78,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/pages/LoginPage.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="108" column="5" lean-forward="true" selection-start-line="108" selection-start-column="5" selection-end-line="108" selection-end-column="5" />
+            <state relative-caret-position="40">
+              <caret line="25" column="43" selection-start-line="25" selection-start-column="43" selection-end-line="25" selection-end-column="43" />
             </state>
           </provider>
         </entry>
@@ -104,14 +108,23 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/pages/NewLoginPage.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="43">
-              <caret line="297" column="35" lean-forward="true" selection-start-line="297" selection-start-column="35" selection-end-line="297" selection-end-column="35" />
+            <state relative-caret-position="81">
+              <caret line="297" column="37" selection-start-line="297" selection-start-column="22" selection-end-line="297" selection-end-column="37" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="107">
+              <caret line="17" column="23" lean-forward="true" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -167,7 +180,6 @@
         <option value="$PROJECT_DIR$/test/widget_test.dart" />
         <option value="$PROJECT_DIR$/android/app/build.gradle" />
         <option value="$PROJECT_DIR$/android/gradle.properties" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/android/app/src/main/java/com/yubo/flutterosc/MainActivity.java" />
         <option value="$PROJECT_DIR$/lib/util/ThemeUtils.dart" />
         <option value="$PROJECT_DIR$/.gitignore" />
@@ -206,11 +218,12 @@
         <option value="$PROJECT_DIR$/lib/pages/MyInfoPage.dart" />
         <option value="$PROJECT_DIR$/pubspec.yaml" />
         <option value="$PROJECT_DIR$/lib/pages/NewLoginPage.dart" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="y" value="203" />
+  <component name="ProjectFrameBounds">
+    <option name="y" value="23" />
     <option name="width" value="1440" />
     <option name="height" value="827" />
   </component>
@@ -367,7 +380,7 @@
     <frame x="0" y="23" width="1440" height="827" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23819743" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23819743" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Build Variants" order="3" side_tool="true" />
@@ -378,7 +391,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32916668" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49427754" weight="0.36717662" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.3449235" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3449235" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32914925" />
@@ -387,7 +400,7 @@
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50572246" side_tool="true" weight="0.28278688" />
       <window_info anchor="bottom" id="Logcat" order="10" weight="0.32777777" />
       <window_info anchor="bottom" id="Version Control" order="11" weight="0.32914925" />
-      <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.49427754" weight="0.35465926" />
+      <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.49427754" visible="true" weight="0.35465926" />
       <window_info anchor="bottom" id="Messages" order="13" weight="0.32267037" />
       <window_info anchor="bottom" id="Flutter Performance" order="14" side_tool="true" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -420,13 +433,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="1" column="11" selection-start-line="1" selection-start-column="11" selection-end-line="1" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/demo.dart" />
     <entry file="file://$PROJECT_DIR$/lib/pages/TestPage.dart" />
     <entry file="file://$PROJECT_DIR$/lib/pages/UserInfoDetailPage.dart" />
@@ -743,18 +749,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/pages/LoginPage.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="108" column="5" lean-forward="true" selection-start-line="108" selection-start-column="5" selection-end-line="108" selection-end-column="5" />
+        <state relative-caret-position="40">
+          <caret line="25" column="43" selection-start-line="25" selection-start-column="43" selection-end-line="25" selection-end-column="43" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/pages/NewLoginPage.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="43">
-          <caret line="297" column="35" lean-forward="true" selection-start-line="297" selection-start-column="35" selection-end-line="297" selection-end-column="35" />
+        <state relative-caret-position="81">
+          <caret line="297" column="37" selection-start-line="297" selection-start-column="22" selection-end-line="297" selection-end-column="37" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="107">
+          <caret line="17" column="23" lean-forward="true" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
         </state>
       </provider>
     </entry>

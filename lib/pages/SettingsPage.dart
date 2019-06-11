@@ -42,15 +42,9 @@ class SettingsPage extends StatelessWidget {
   _renderRow(BuildContext ctx, int i) {
     var item = listData[i];
     if (item is String) {
-      Widget w = Divider(
-        height: 1.0,
-      );
+      Widget w;
       switch (item) {
         case TAG_START:
-          w = Divider(
-            height: 1.0,
-          );
-          break;
         case TAG_END:
           w = Divider(
             height: 1.0,
@@ -69,6 +63,10 @@ class SettingsPage extends StatelessWidget {
             height: 20.0,
           );
           break;
+        default:
+          w = Divider(
+            height: 1.0,
+          );
       }
       return w;
     } else if (item is ListItem) {
