@@ -1,6 +1,8 @@
 # FlutterOSC
 - 基于Google Flutter的开源中国客户端，支持Android和iOS。
-- [关于Google Flutter](https://flutter.io/)
+- [关于Google Flutter](https://flutter.io/)。
+
+**注意！项目不再维护，仅供Flutter初学者学习交流，且该项目使用的Flutter版本和Dart版本都较老，某些语法可能已经过时。**
 
 # Android扫码下载APK
 - 请使用手机浏览器扫码下载，不要使用微信或者qq扫码
